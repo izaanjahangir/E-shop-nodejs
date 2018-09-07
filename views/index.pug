@@ -1,0 +1,77 @@
+extends layout
+
+block content
+    #categories-container.mt-1.mb-5
+        h2.text-center Popular Categories
+        .row.child-center
+            .col-sm-6.col-md-3.category-box
+                .inner-box
+                    a(href="/ad")
+                        img(src="/images/house.jpg" style="width:100%")
+                        .category-title-label House for sale
+            .col-sm-6.col-md-3.category-box
+                .inner-box
+                    a(href="/ad")
+                        img(src="/images/house2.jpg" style="width:100%")
+                        .category-title-label House for rent
+            .col-sm-6.col-md-3.category-box
+                .inner-box
+                    a(href="/ad")
+                        img(src="/images/bike.jpg" style="width:100%")
+                        .category-title-label Bikes
+            .col-sm-6.col-md-3.category-box
+                .inner-box
+                    a(href="/ad")
+                        img(src="/images/car.png" style="width:100%")
+                        .category-title-label Cars
+            .col-sm-6.col-md-3.category-box
+                .inner-box
+                    a(href="/ad")
+                        img(src="/images/mobile.svg" style="width:100%")
+                        .category-title-label Mobiles
+            .col-sm-6.col-md-3.category-box
+                .inner-box
+                    a(href="/ad")
+                        img(src="/images/animal.png" style="width:100%")
+                        .category-title-label Animals
+            .col-sm-6.col-md-3.category-box
+                .inner-box
+                    a(href="/ad")
+                        img(src="/images/job.png" style="width:100%")
+                        .category-title-label Jobs
+            .col-sm-6.col-md-3.category-box
+                .inner-box
+                    a(href="/ad")
+                        img(src="/images/furniture.png" style="width:100%")
+                        .category-title-label Furniture
+            .col-sm-6.col-md-3.category-box
+                .inner-box
+                    a(href="/ad")
+                        img(src="/images/electronic.png" style="width:100%")
+                        .category-title-label Electronics and home appliances
+            .col-sm-6.col-md-3.category-box
+                .inner-box
+                    a(href="/ad")
+                        img(src="/images/service.svg" style="width:100%")
+                        .category-title-label Services
+            .col-sm-6.col-md-3.category-box
+                .inner-box
+                    a(href="/ad")
+                        img(src="/images/book.png" style="width:100%")
+                        .category-title-label Books, sports and hobbies
+            .col-sm-6.col-md-3.category-box
+                .inner-box
+                    a(href="/ad")
+                        img(src="/images/other.svg" style="width:100%")
+                        .category-title-label Others
+    #products-container
+        h1.text-center Products
+        .row.child-center
+            each ad in ads
+                .box.col-10.col-sm-6.col-md-3
+                    #{console.log(ad.images[0])}
+                    div.inner-box
+                        img(src=ad.images[0] style="width:100%")
+                        .price-label= ad.title
+                        span= ad.location
+                        button.check-item-btn.btn.btn-sm.btn-primary(onClick=`routeToDetails('${ad._id}')`) Check Item

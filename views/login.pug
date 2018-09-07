@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    form(onSubmit="return login()" id="auth-form").form
+        .form-group
+            label Username:
+            input(type="text" id="username" name="username" placeholder="Enter your name").form-control
+        .form-group
+            label Password:
+            input(type="password" id="password" name="password" placeholder="Enter your password").form-control
+        .form-group
+            input(type="submit" value="Login").btn
+            a(href="/auth/signup") Don't have an account? Create here

@@ -1,0 +1,104 @@
+:root{
+    --theme-color-dark: #16a085;
+    --theme-color-light: #1abc9c;
+    --theme-color-danger: #c0392b;
+    --theme-color-success: #27ae60;
+    --font-color-light: #ecf0f1;
+}
+header *{
+    margin: 0;
+}
+#main-container{
+    margin-top: 10px;
+}
+#upper-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--theme-color-dark);
+    color: var(--font-color-light);
+    padding: 20px;
+    height: 70px;
+    z-index: 500;
+}
+#upper-header a, #upper-header a:hover{
+    text-decoration: none;
+    color: var(--font-color-light);
+}
+#side-nav{
+    display: none;
+    transform: translateX(-575px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--theme-color-light);
+    color: var(--font-color-light);
+    width: 250px;
+    height: 100vh;
+    transition: all 1000ms ease-in-out;
+    z-index: 1000;
+}
+#side-nav a, #side-nav a:hover{
+    text-decoration: none;
+    color: var(--font-color-light);
+}
+#side-nav ul li{
+    background: none !important;
+}
+#side-nav ul li:first-child{
+    display: flex;
+    justify-content: space-between;
+}
+#user-avatar{
+    display: flex;
+    align-items: center;
+}
+#user-avatar img{
+    border-radius: 100%;
+    height: 40px;
+    width: 40px;
+    margin-right: 10px;  
+}
+
+
+#custom-loader, #custom-modal{
+    display: none;
+    opacity: 0;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    min-height: 50px;
+    min-width: 200px;
+    max-width: 250px;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(100px);
+    transition: all ease-in-out 500ms;
+}
+#custom-loader{
+    background: var(--theme-color-dark);
+    color: var(--font-color-light);
+}
+.modal-success{
+    background: var(--theme-color-success);
+    color: var(--font-color-light);
+}
+.modal-failure{
+    background: var(--theme-color-danger);
+    color: var(--font-color-light);
+}
+
+#main-container{
+    margin-top: 80px;
+}
+@media (max-width: 575px){
+    #side-nav{
+        width: 100vw;
+    }
+}
