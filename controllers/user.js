@@ -1,13 +1,26 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const fs = require("fs");
+
 const helpers = require("../config/helpers");
 const User = require("../models/User");
 
+// Cloudnary services
+const cloudnary = require("../services/cloudnary");
+
 const register = async (req, res) => {
   const { firstName, lastName, username, email, password } = req.body;
+  const file = req.file;
 
   try {
-    const data = { firstName, lastName, username, email, password };
+    const data = {
+      firstName,
+      lastName,
+      username,
+      email,
+      password,
+      profilePicture: process.env.DEFAULT_PROFILE_PICTURE
+    };
 
     const user = new User(data);
     const salt = await bcrypt.genSalt(10);
@@ -16,16 +29,30 @@ const register = async (req, res) => {
 
     await user.save();
 
+    // if image is uploaded
+    if (file) {
+      const path = `users/${user._id}`;
+      const uploadResponse = await cloudnary.uploadImage(file, path);
+
+      user.profilePicture = uploadResponse.url;
+
+      // delete uploaded image from filesystem
+      fs.unlinkSync(file.path);
+    }
+
     const token = await jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-    const parsedUser = user.toJSON();
 
-    delete parsedUser.password;
+    user.tokens = [token];
 
-    res.json({
-      user: parsedUser,
+    await user.save();
+
+    const responseObject = {
+      user,
       token,
       message: "User created succcessfully"
-    });
+    };
+
+    res.json(responseObject);
   } catch (e) {
     console.log("e =>", e);
     const errors = helpers.handleMongooseError(e);
@@ -45,12 +72,10 @@ const login = async (req, res) => {
     const isVerified = await bcrypt.compare(password, user.password);
 
     if (!isVerified) throw { message: "Email or password is not correct" };
+    
     const token = await jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-    const parsedUser = user.toJSON();
 
-    delete parsedUser.password;
-
-    res.status(200).json({ user: parsedUser, token });
+    res.status(200).json({ user, token });
   } catch (e) {
     console.log("e =>", e);
     const errors = helpers.handleMongooseError(e);

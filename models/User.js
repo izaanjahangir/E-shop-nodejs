@@ -15,8 +15,19 @@ const UserSchema = new Schema({
     required: [true, "Username is required"],
     unique: [true, "This username is already exist"]
   },
-  password: String
+  password: String,
+  profilePicture: String,
+  tokens: Array
 });
+
+UserSchema.methods.toJSON = function() {
+  const user = this.toObject();
+
+  delete user.password;
+  delete user.tokens;
+
+  return user;
+};
 
 UserSchema.plugin(uniqueValidator, { message: "{PATH} already exist." });
 module.exports = mongoose.model("users", UserSchema);
