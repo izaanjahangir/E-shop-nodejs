@@ -40,7 +40,7 @@ const register = async (req, res) => {
       fs.unlinkSync(file.path);
     }
 
-    const token = await jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
 
     user.tokens = [token];
 
@@ -72,8 +72,8 @@ const login = async (req, res) => {
     const isVerified = await bcrypt.compare(password, user.password);
 
     if (!isVerified) throw { message: "Email or password is not correct" };
-    
-    const token = await jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
 
     res.status(200).json({ user, token });
   } catch (e) {
