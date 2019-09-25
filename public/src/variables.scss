@@ -1,12 +1,23 @@
 // Google fonts
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap"); //Montserrat
 
+// Breakpoints
+$smallBreakpoint: 767px;
+
 // Radius
 $largeRadius: 1.5em;
+
+// Padding
+$largePadding: 5em;
+
+// Font Size
+$extraLargeFont: 4.3em;
+$largeFont: 3em;
 
 // Colors
 $lightGrey: rgba(174, 174, 174, 1);
 $black: #333333;
+$blackOverlay: rgba(0, 0, 0, 0.6);
 $iconActive: #00c6fb;
 
 // Gradients

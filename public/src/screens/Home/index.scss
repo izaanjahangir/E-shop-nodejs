@@ -1,0 +1,44 @@
+@import "../../variables.scss";
+
+#hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background-image: url("../../assets/images/hero_1.jpg");
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+}
+
+#hero-background .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -2;
+  background: $blackOverlay;
+}
+
+#hero-background .main {
+  //   padding: 0 $largePadding;
+  height: 100%;
+  //   width: 500px;
+  display: flex;
+  //   flex-direction: column;
+  align-items: center;
+}
+
+#hero-background .main h1 {
+  font-size: $largeFont;
+  color: white;
+  font-weight: bold;
+}
+
+@media (max-width: $smallBreakpoint) {
+  #hero-background .main h1 {
+    text-align: center;
+  }
+}
