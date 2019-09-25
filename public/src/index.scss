@@ -31,3 +31,19 @@
   color: white;
   text-decoration: none;
 }
+
+.gender-text {
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+}
+
+.avatar-option {
+  width: 70px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.avatar-option.active {
+  border: 5px solid white;
+}

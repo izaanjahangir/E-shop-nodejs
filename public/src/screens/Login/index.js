@@ -25,8 +25,8 @@ export default class Login extends Component {
     return (
       <div className="full-height">
         <AuthBackground />
-        <Container className="h-100">
-          <Row className="justify-content-center align-items-center h-100">
+        <Container className="h-100 d-flex justify-content-center">
+          <Row className="w-100 justify-content-center">
             <Col md={6} lg={5}>
               <Form>
                 <div className="text-center my-4">
@@ -57,7 +57,7 @@ export default class Login extends Component {
                 <CustomButtonLarge text="Login" />
                 <div className="my-3 text-center">
                   <Link className="link" to="/register">
-                    Forgot Username/Password?
+                    Don't have an account? Register
                   </Link>
                 </div>
               </Form>
