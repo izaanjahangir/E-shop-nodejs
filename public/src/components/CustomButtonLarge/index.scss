@@ -1,0 +1,18 @@
+@import "../../variables.scss";
+
+.custom-button-large {
+  border-radius: $largeRadius;
+  background: $black;
+  font-size: 16px;
+  border: none;
+  font-weight: bold;
+  position: relative;
+}
+
+.custom-button-large:hover,
+.custom-button-large:active,
+.custom-button-large:focus {
+  border-radius: $largeRadius;
+  background: $black !important;
+  border: none;
+}

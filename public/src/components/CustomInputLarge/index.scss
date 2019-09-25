@@ -1,0 +1,43 @@
+@import "../../variables.scss";
+
+.custom-input-large-container {
+  border-radius: $largeRadius;
+  position: relative;
+  background: white;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+}
+
+.custom-input-large-container input {
+  border-radius: $largeRadius !important;
+  padding-left: 50px;
+  background: none;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.custom-input-large-container input:focus {
+  background: none;
+}
+
+.custom-input-addon {
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  min-width: 40px;
+  text-align: right;
+  background: none;
+}
+// .custom-input-large-addon-container {
+//   background: white;
+//   border-radius: $largeRadius;
+// }
+
+// .custom-input-large-addon-container span {
+//   background: white;
+//   border-top-left-radius: $largeRadius;
+//   border-bottom-left-radius: $largeRadius;
+//   border: none;
+// }

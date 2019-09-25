@@ -1,3 +1,15 @@
+// Google fonts
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap"); //Montserrat
+
+// Radius
+$largeRadius: 1.5em;
+
+// Colors
+$lightGrey: rgba(174, 174, 174, 1);
+$black: #333333;
+$iconActive: #00c6fb;
+
+// Gradients
 $authBackgroundColor: linear-gradient(
   to bottom,
   rgba(0, 91, 234, 0.85),
