@@ -1,0 +1,23 @@
+@import "../../variables.scss";
+
+#auth-background-container {
+  height: 100vh;
+}
+
+#background-image {
+  background-image: url("../../assets/images/background_01.jpg");
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  background-position: center;
+}
+
+#auth-background-container #overlay {
+  background: $authBackgroundColor;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
