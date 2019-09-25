@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "client": "cd public && npm start",
+    "server": "nodemon server",
     "start": "node server",
-    "dev": "nodemon server"
+    "dev": "concurrently \"npm run client\" \"npm run server\""
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,7 @@
   },
   "homepage": "https://github.com/izaanjahangir/E-shop-nodejs#readme",
   "devDependencies": {
+    "concurrently": "^4.1.2",
     "nodemon": "^1.19.1"
   },
   "dependencies": {
