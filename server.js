@@ -6,10 +6,6 @@ require("./config/db");
 
 const port = process.env.PORT;
 
-app.get("/", (_, res) => {
-  res.json({ message: "Server is running Woah!" });
-});
-
 // middlewares
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
