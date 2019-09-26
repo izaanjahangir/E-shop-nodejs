@@ -1,9 +1,11 @@
-import { faUser, faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faLock, faEnvelope, faHeart, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
 export default {
   icons: {
     faUser,
     faLock,
-    faEnvelope
+    faEnvelope,
+    faHeart,
+    faShoppingCart
   }
 };

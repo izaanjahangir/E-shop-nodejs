@@ -1,3 +1,86 @@
-.custom-header {
-  background: rgba(255, 255, 255, 0.7);
+@import "../../variables.scss";
+
+#custom-header-container {
+  display: flex;
+  justify-content: space-between;
+  background: $black;
+  padding: $extraSmallPadding $mediumPadding;
+  color: white;
+  align-items: center;
+  min-height: 70px;
+}
+
+#custom-header-container h3 {
+  padding: 0 $extraSmallPadding;
+  margin: 0;
+}
+
+#custom-header-container form {
+  padding-right: $extraSmallPadding;
+  flex: 0.7;
+  min-width: 350px;
+  max-width: 600px;
+}
+
+#header-icons {
+  display: flex;
+  font-size: 20px;
+}
+
+#header-icons .count {
+  position: absolute;
+  right: -3px;
+  top: 0;
+  background: $danger;
+  font-size: 0.5em;
+  border-radius: 100%;
+}
+
+#header-icons div {
+  padding: 0 $extraSmallPadding;
+}
+
+#header-icons p {
+  margin: 0;
+  font-size: 0.7em;
+}
+
+#header-icon .heart-icon,
+#header-icon .cart-icon {
+  font-size: 1.5em;
+}
+
+@media (max-width: $smallBreakpoint) {
+  #custom-header-container {
+    flex-direction: column;
+  }
+
+  #custom-header-container h3 {
+    padding: 0;
+    padding-bottom: $extraSmallPadding;
+    margin-right: auto;
+  }
+
+  #custom-header-container form {
+    padding-right: 0;
+    width: 100%;
+    min-width: 350px;
+    max-width: initial;
+  }
+
+  #header-icons {
+    padding: 0;
+    margin-left: auto;
+    padding-top: $extraSmallPadding
+  }
+}
+
+@media (max-width: $extraSmallBreakpoint){
+  #custom-header-container {
+    padding: $extraSmallPadding;
+  }
+
+  #custom-header-container form {
+    min-width: initial;
+  }
 }
