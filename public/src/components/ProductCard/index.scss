@@ -1,0 +1,41 @@
+@import "../../variables.scss";
+
+.product-card {
+  text-align: center;
+}
+
+.product-card .category {
+  color: $lightGrey;
+  text-align: center;
+  margin-bottom: 0.4em;
+}
+
+.product-card .title {
+  color: $black;
+  text-align: center;
+  font-weight: bold;
+}
+
+.product-card .price-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-card .price-container * {
+  padding-left: $extraSmallPadding;
+  padding-right: $extraSmallPadding;
+}
+
+.product-card .price-container .active {
+  color: $danger;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.product-card .price-container .real {
+  font-size: 0.85em;
+  color: $lightGrey;
+  font-weight: bold;
+  text-decoration: line-through
+}
