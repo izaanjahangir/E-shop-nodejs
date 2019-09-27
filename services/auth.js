@@ -23,7 +23,7 @@ const login = async (payload, role) => {
 
     if (!isVerified) throw new Error("Email or password is not correct");
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET);
 
     return { user, token };
   } catch (e) {
@@ -65,7 +65,7 @@ const register = async (payload, file) => {
       fs.unlinkSync(file.path);
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET);
 
     user.tokens = [token];
 

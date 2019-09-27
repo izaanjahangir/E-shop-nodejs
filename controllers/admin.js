@@ -1,13 +1,14 @@
 // services
 const auth = require("../services/auth");
 
-const login = (req, res) => {
+const login = async (req, res) => {
   try {
-    const response = auth.login(req.body, "admin");
+    const response = await auth.login(req.body, "admin");
 
     res.status(200).json(response);
   } catch (e) {
-    res.status(400).json(e);
+    console.log("e =>", e);
+    res.status(400).json({ message: e.message });
   }
 };
 
