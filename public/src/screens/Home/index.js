@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
-import CustomButtonLarge from "../../components/CustomButtonLarge";
-import ProductCard from "../../components/ProductCard";
+import ProductSlider from "../../components/ProductSlider";
 import Header from "../../components/Header";
 import "./index.scss";
 
@@ -13,9 +12,10 @@ class Home extends Component {
         <div id="container">
           <Header />
           <Container>
-            <div id="latest-products">
+            {/* <div id="latest-products">
               <ProductCard />
-            </div>
+            </div> */}
+            <ProductSlider />
           </Container>
         </div>
       </div>

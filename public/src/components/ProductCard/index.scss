@@ -8,12 +8,14 @@
   color: $lightGrey;
   text-align: center;
   margin-bottom: 0.4em;
+  font-size: 0.9em;
 }
 
 .product-card .title {
   color: $black;
   text-align: center;
   font-weight: bold;
+  font-size: 0.9em;
 }
 
 .product-card .price-container {
@@ -37,5 +39,18 @@
   font-size: 0.85em;
   color: $lightGrey;
   font-weight: bold;
-  text-decoration: line-through
+  text-decoration: line-through;
+}
+
+@media (max-width: 500px) {
+  .product-card .card-body button {
+    display: block;
+    width: 100%;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .product-card .card-body button:last-child {
+    margin-top: 5px;
+  }
 }

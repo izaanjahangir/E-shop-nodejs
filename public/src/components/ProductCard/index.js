@@ -3,8 +3,8 @@ import { Card, Button } from "react-bootstrap";
 
 import "./index.scss";
 
-const ProductCard = () => (
-  <Card className="product-card" style={{ width: "18rem" }}>
+const ProductCard = props => (
+  <Card className="product-card" style={{ width: "18rem", ...props.style }}>
     <Card.Img
       variant="top"
       src="http://www.drapersmaylands.com/MainFolder/home-banner/default-banner-mobile.jpg"
@@ -16,9 +16,14 @@ const ProductCard = () => (
         <p className="discount active">$300</p>
         <p className="real">$300</p>
       </div>
-      <Button variant="primary">Explore</Button>
+      <Button size="sm" variant="primary" className="mr-1">Explore</Button>
+      <Button size="sm" variant="danger" className="ml-1">Add To Cart</Button>
     </Card.Body>
   </Card>
 );
+
+ProductCard.defaultProps = {
+  style: {}
+};
 
 export default ProductCard;
