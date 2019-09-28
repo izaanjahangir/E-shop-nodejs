@@ -1,6 +1,6 @@
 const handleMongooseError = response => {
   let returnResponse = {};
-
+  
   if (response.name === "ValidationError") {
     const errorsArray = [];
     for (item in response.errors) {
@@ -9,7 +9,7 @@ const handleMongooseError = response => {
 
     returnResponse.message = errorsArray;
   } else if ("message" in response) {
-    returnResponse = response;
+    returnResponse = { message: response.message };
   }
 
   return returnResponse;

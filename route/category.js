@@ -17,17 +17,13 @@ const storage = multer.diskStorage({
   }
 });
 
+router.get("/:id", categoryController.getCategoryById);
+
 router.post(
   "/create",
   isAdmin,
   multer({ storage }).single("image"),
   categoryController.createCategory
 );
-// router.post(
-//   "/register",
-//   multer({ storage }).single("image"),
-//   userController.register
-// );
-// router.post("/login", userController.login);
 
 module.exports = router;

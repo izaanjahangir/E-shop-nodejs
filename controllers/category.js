@@ -1,4 +1,5 @@
 const fs = require("fs");
+const mongoose = require("mongoose");
 
 const Category = require("../models/Category");
 const helpers = require("../config/helpers");
@@ -30,13 +31,35 @@ const createCategory = async (req, res) => {
 
     res.status(200).json(category);
   } catch (e) {
-    console.log("e =>", e);
     const errors = helpers.handleMongooseError(e);
 
     res.status(400).send(errors);
   }
 };
 
+const getCategoryById = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      throw new Error("Please provide a valid id!");
+    }
+
+    const category = await Category.findById(id);
+
+    if (!category) {
+      throw new Error("No category found!");
+    }
+
+    res.status(200).json(category);
+  } catch (e) {
+    console.log("e =>", e);
+    const errors = helpers.handleMongooseError(e);
+
+    res.status(400).send(errors);
+  }
+};
 module.exports = {
-  createCategory
+  createCategory,
+  getCategoryById
 };
