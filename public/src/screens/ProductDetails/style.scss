@@ -5,6 +5,13 @@
   max-height: 300px;
 }
 
+.product-details-side .list-group-item:nth-child(2) span:nth-child(2) {
+  font-size: 0.85em;
+  color: $lightGrey;
+  font-weight: bold;
+  text-decoration: line-through;
+}
+
 .product-details-side .list-group-item:first-child h4 {
   margin: 0;
   line-height: 0.8;

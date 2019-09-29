@@ -8,25 +8,31 @@ import {
   Table,
   Button
 } from "react-bootstrap";
-import "./style.scss";
+import StarRatingComponent from "react-star-rating-component";
 
+import "./style.scss";
 import Header from "../../components/Header";
 import ProductCarousel from "../../components/ProductCarousel";
 
 class ProductDetails extends Component {
+  state = {
+    rating: 3,
+    ratingEditing: true
+  };
+
+  onStarClick = value => this.setState({ rating: value });
+
   render() {
+    const { rating, ratingEditing } = this.state;
+
     return (
       <div id="container">
         <Header />
         <Container className="my-3">
           <ProductCarousel />
-          {/* <div id="main" className="text-center mt-3">
-            <h2 className="text-primary font-weight-bold">Infinix Hot 4</h2>
-            <span>Category</span>
-          </div> */}
           <Row className="mt-3" id="product-details-row">
             <Col md={8}>
-              <div id="details" >
+              <div id="details">
                 <div id="description">
                   <h4 className="font-weight-bold">Description:</h4>
                   <ListGroup>
@@ -78,12 +84,28 @@ class ProductDetails extends Component {
             <Col md={4} className="product-details-side mb-3">
               <ListGroup>
                 <ListGroupItem className="text-center">
-                  <h4 className="text-primary font-weight-bold">Infinix Hot 4</h4>
+                  <h4 className="text-primary font-weight-bold">
+                    Infinix Hot 4
+                  </h4>
                   <span>Category</span>
                 </ListGroupItem>
                 <ListGroupItem className="d-flex justify-content-between">
                   <span>300$</span>
                   <span>500$</span>
+                </ListGroupItem>
+                <ListGroupItem>
+                  <div
+                    className="d-flex justify-content-center"
+                    style={{ fontSize: "24px" }}
+                  >
+                    <StarRatingComponent
+                      name="rate1"
+                      starCount={5}
+                      value={rating}
+                      onStarClick={this.onStarClick}
+                      editing={ratingEditing}
+                    />
+                  </div>
                 </ListGroupItem>
                 <ListGroupItem>
                   <Button variant="danger" block>

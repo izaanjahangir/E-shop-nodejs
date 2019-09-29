@@ -11,9 +11,6 @@ class Home extends Component {
       <div id="container">
         <Header />
         <Container>
-          {/* <div id="latest-products">
-              <ProductCard />
-            </div> */}
           <ProductSlider />
         </Container>
       </div>
