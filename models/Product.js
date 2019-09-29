@@ -21,9 +21,10 @@ const ProductSchema = new Schema(
     price: { type: Number, required: [true, "Price is required!"] },
     currency: { type: String, default: "$" },
     discountedPrice: { type: Number, default: 0 },
-    rating: { type: Number, default: 0 }
+    rating: { type: Number, default: 0 },
+    features: { type: Object, default: {} }
   },
-  { timestamps: true }
+  { timestamps: true, minimize: false }
 );
 
 ProductSchema.plugin(uniqueValidator, { message: "{PATH} already exist." });

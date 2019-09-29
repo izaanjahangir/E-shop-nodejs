@@ -21,7 +21,8 @@ const createProduct = async (req, res) => {
       category: data.category,
       price: data.price,
       discountedPrice: data.discountedPrice,
-      currency: data.currency
+      currency: data.currency,
+      features: data.features
     };
 
     const product = new Product(payload);
