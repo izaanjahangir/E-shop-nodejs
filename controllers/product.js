@@ -42,6 +42,8 @@ const createProduct = async (req, res) => {
 
     product.images = responsesArr.map(item => item.url);
 
+    await product.save();
+
     res.status(200).json(product);
   } catch (e) {
     console.log("e =>", e);
