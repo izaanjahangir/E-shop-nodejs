@@ -8,16 +8,14 @@ import "./index.scss";
 class Home extends Component {
   render() {
     return (
-      <div>
-        <div id="container">
-          <Header />
-          <Container>
-            {/* <div id="latest-products">
+      <div id="container">
+        <Header />
+        <Container>
+          {/* <div id="latest-products">
               <ProductCard />
             </div> */}
-            <ProductSlider />
-          </Container>
-        </div>
+          <ProductSlider />
+        </Container>
       </div>
     );
   }

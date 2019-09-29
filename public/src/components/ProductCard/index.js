@@ -16,14 +16,24 @@ const ProductCard = props => (
         <p className="discount active">$300</p>
         <p className="real">$300</p>
       </div>
-      <Button size="sm" variant="primary" className="mr-1">Explore</Button>
-      <Button size="sm" variant="danger" className="ml-1">Add To Cart</Button>
+      <Button
+        size="sm"
+        variant="primary"
+        className="mr-1"
+        onClick={props.onExplore}
+      >
+        Explore
+      </Button>
+      <Button size="sm" variant="danger" className="ml-1">
+        Add To Cart
+      </Button>
     </Card.Body>
   </Card>
 );
 
 ProductCard.defaultProps = {
-  style: {}
+  style: {},
+  onExplore: function() {}
 };
 
 export default ProductCard;

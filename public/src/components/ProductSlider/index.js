@@ -1,13 +1,16 @@
 import React from "react";
 import Slider from "react-slick";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { withRouter } from "react-router-dom";
 
 import constants from "../../config/constants";
 import "./index.scss";
 import ProductCard from "../ProductCard";
 
-const ProductSlider = () => {
+const ProductSlider = props => {
   let sliderRef;
+
+  const navigate = () => props.history.push("/product/test");
 
   const settings = {
     dots: false,
@@ -41,12 +44,15 @@ const ProductSlider = () => {
     <div id="product-slider-container" className="my-4">
       <h1>Product Slider</h1>
       <Slider ref={slider => (sliderRef = slider)} {...settings}>
-        <ProductCard style={{ margin: "auto", marginRight: "10px" }} />
-        <ProductCard style={{ margin: "auto" }} />
-        <ProductCard style={{ margin: "auto" }} />
-        <ProductCard style={{ margin: "auto" }} />
-        <ProductCard style={{ margin: "auto" }} />
-        <ProductCard style={{ margin: "auto" }} />
+        <ProductCard
+          onExplore={navigate}
+          style={{ margin: "auto", marginRight: "10px" }}
+        />
+        <ProductCard onExplore={navigate} style={{ margin: "auto" }} />
+        <ProductCard onExplore={navigate} style={{ margin: "auto" }} />
+        <ProductCard onExplore={navigate} style={{ margin: "auto" }} />
+        <ProductCard onExplore={navigate} style={{ margin: "auto" }} />
+        <ProductCard onExplore={navigate} style={{ margin: "auto" }} />
       </Slider>
       <div className="arrow-container">
         <FontAwesomeIcon
@@ -62,4 +68,4 @@ const ProductSlider = () => {
   );
 };
 
-export default ProductSlider;
+export default withRouter(ProductSlider);

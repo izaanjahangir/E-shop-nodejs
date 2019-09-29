@@ -1,0 +1,47 @@
+@import "../../variables.scss";
+
+.product-carousel-outer-container {
+  position: relative;
+}
+
+.product-carousel-container {
+  height: 50vw;
+  max-height: 300px;
+}
+
+.product-carousel-container .carousel-inner,
+.product-carousel-container .carousel-inner .carousel-item {
+  height: 100%;
+}
+
+.product-carousel-outer-container .indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.product-carousel-outer-container .indicators img {
+  width: 40px;
+  height: 40px;
+  margin-left: $extraSmallMargin;
+  margin-right: $extraSmallMargin;
+  opacity: 0.5;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 300ms linear;
+}
+
+.product-carousel-outer-container .indicators img:hover {
+  opacity: 1;
+}
+
+.product-carousel-container {
+  background: $blackOverlay;
+}
+
+@media (max-width: 400px) {
+  .indicators {
+    display: none;
+  }
+}

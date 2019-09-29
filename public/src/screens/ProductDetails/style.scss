@@ -1,0 +1,23 @@
+@import "../../variables.scss";
+
+.product-carousel-column {
+  height: 100vw;
+  max-height: 300px;
+}
+
+.product-details-side .list-group-item:first-child h4 {
+  margin: 0;
+  line-height: 0.8;
+}
+
+.product-details-side .list-group-item:first-child span {
+  font-size: 0.8em;
+  font-weight: bold;
+  color: $lightGrey;
+}
+
+@media (max-width: $smallBreakpoint) {
+  #product-details-row {
+    flex-flow: column-reverse;
+  }
+}
