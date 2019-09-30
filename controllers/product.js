@@ -66,6 +66,7 @@ const findProduct = async (req, res) => {
     const limit = req.body.limit || 5;
 
     const query = {
+      id: req.body.id,
       category: req.body.category,
       title: req.body.title,
       rating: req.body.rating,
@@ -102,6 +103,10 @@ const findProduct = async (req, res) => {
 
 const queryBuilder = data => {
   const query = {};
+
+  if (data.id) {
+    query._id = data.id;
+  }
 
   if (data.title) {
     query.title = { $regex: `^${data.title}`, $options: "i" };
