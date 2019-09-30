@@ -4,6 +4,27 @@ const Product = require("../models/Product");
 const helpers = require("../config/helpers");
 const cloudnary = require("../services/cloudnary");
 
+const findSingleProduct = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    if (!helpers.isValidMongooseId(id)) {
+      throw new Error("Please provide valid id!");
+    }
+
+    const product = await Product.findById(id)
+      .populate("category")
+      .exec();
+
+    res.status(200).json(product);
+  } catch (e) {
+    console.log("e =>", e);
+    const errors = helpers.handleMongooseError(e);
+
+    res.status(400).json(errors);
+  }
+};
+
 const createProduct = async (req, res) => {
   const bannerImage = req.files.bannerImage;
   const images = req.files.images || [];
@@ -134,6 +155,7 @@ const queryBuilder = data => {
 };
 
 module.exports = {
+  findSingleProduct,
   createProduct,
   findProduct
 };

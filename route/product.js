@@ -23,6 +23,7 @@ var productUpload = multer({ storage }).fields([
 ]);
 
 router.post("/create", isAdmin, productUpload, productController.createProduct);
-router.post("/find", productController.findProduct)
+router.post("/find", productController.findProduct);
+router.get("/find/:id", productController.findSingleProduct);
 
 module.exports = router;
