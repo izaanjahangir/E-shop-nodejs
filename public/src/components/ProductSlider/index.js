@@ -11,7 +11,12 @@ import Spinner from "../Spinner";
 const ProductSlider = props => {
   let sliderRef;
 
-  const navigate = () => props.history.push("/product/test");
+  const navigate = id => {
+    const product = props.data.find(item => item._id === id);
+    console.log("product =>", product);
+
+    props.history.push(`/product/${id}`, { product });
+  };
 
   const settings = {
     dots: false,

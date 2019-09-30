@@ -42,7 +42,7 @@ const ProductCard = props => {
           size="sm"
           variant="primary"
           className="mr-1"
-          onClick={props.onExplore}
+          onClick={() => props.onExplore(data._id)}
         >
           Explore
         </Button>

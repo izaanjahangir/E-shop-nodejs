@@ -1,5 +1,11 @@
 @import "../../variables.scss";
 
+.header-brand,
+.header-brand:hover {
+  text-decoration: none;
+  color: white;
+}
+
 #custom-header-container {
   display: flex;
   justify-content: space-between;
@@ -71,11 +77,11 @@
   #header-icons {
     padding: 0;
     margin-left: auto;
-    padding-top: $extraSmallPadding
+    padding-top: $extraSmallPadding;
   }
 }
 
-@media (max-width: $extraSmallBreakpoint){
+@media (max-width: $extraSmallBreakpoint) {
   #custom-header-container {
     padding: $extraSmallPadding;
   }

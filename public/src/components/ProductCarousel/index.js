@@ -9,14 +9,25 @@ class ProductCarousel extends Component {
     direction: null
   };
 
-  handleSelect = selectedIndex => {
-    console.log("selectedIndex =>", selectedIndex);
+  decideIndicatorsClasses = i => {
+    const { index } = this.state;
 
+    let baseClass = "";
+
+    if (index === i) {
+      baseClass += "active";
+    }
+
+    return baseClass;
+  };
+
+  handleSelect = selectedIndex => {
     this.setState({ index: selectedIndex });
   };
 
   render() {
     const { index } = this.state;
+    const { images } = this.props;
 
     return (
       <div className="product-carousel-outer-container">
@@ -26,45 +37,30 @@ class ProductCarousel extends Component {
           onSelect={this.handleSelect}
           indicators={false}
         >
-          <Carousel.Item className="text-center">
-            <img
-              className="h-100"
-              src="http://res.cloudinary.com/deot6gwx4/image/upload/v1569752225/products/5d90849e9e987b3768dd6526/Infinix_HOT_4_Pro_X556_L_1-1569752222341.jpg"
-              alt="First slide"
-            />
-          </Carousel.Item>
-          <Carousel.Item className="text-center">
-            <img
-              className="h-100"
-              src="http://res.cloudinary.com/deot6gwx4/image/upload/v1569752225/products/5d90849e9e987b3768dd6526/Infinix_HOT_4_Pro_X556_L_1-1569752222341.jpg"
-              alt="Second slide"
-            />
-          </Carousel.Item>
-          <Carousel.Item className="text-center">
-            <img
-              className="h-100"
-              src="http://res.cloudinary.com/deot6gwx4/image/upload/v1569752225/products/5d90849e9e987b3768dd6526/Infinix_HOT_4_Pro_X556_L_1-1569752222341.jpg"
-              alt="Third slide"
-            />
-          </Carousel.Item>
+          {images.map((item, index) => (
+            <Carousel.Item key={index} className="text-center">
+              <img className="h-100" src={item} alt="" />
+            </Carousel.Item>
+          ))}
         </Carousel>
         <div className="indicators">
-          <img
-            alt=""
-            src="http://res.cloudinary.com/deot6gwx4/image/upload/v1569752225/products/5d90849e9e987b3768dd6526/Infinix_HOT_4_Pro_X556_L_1-1569752222341.jpg"
-          />
-          <img
-            alt=""
-            src="http://res.cloudinary.com/deot6gwx4/image/upload/v1569752225/products/5d90849e9e987b3768dd6526/Infinix_HOT_4_Pro_X556_L_1-1569752222341.jpg"
-          />
-          <img
-            alt=""
-            src="http://res.cloudinary.com/deot6gwx4/image/upload/v1569752225/products/5d90849e9e987b3768dd6526/Infinix_HOT_4_Pro_X556_L_1-1569752222341.jpg"
-          />
+          {images.map((item, i) => (
+            <img
+              key={i}
+              className={this.decideIndicatorsClasses(i)}
+              onClick={() => this.handleSelect(i)}
+              alt=""
+              src={item}
+            />
+          ))}
         </div>
       </div>
     );
   }
 }
+
+ProductCarousel.defaultProps = {
+  images: []
+};
 
 export default ProductCarousel;

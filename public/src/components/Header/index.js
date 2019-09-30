@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import {
   Form,
   FormControl,
@@ -15,7 +15,9 @@ import "./index.scss";
 
 const Header = () => (
   <div id="custom-header-container">
-    <h3>Eshop</h3>
+    <Link className="header-brand" to="/">
+      <h3>Eshop</h3>
+    </Link>
     <Form>
       <InputGroup size="sm">
         <DropdownButton

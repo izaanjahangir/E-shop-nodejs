@@ -4,7 +4,7 @@ const fetchLatestProducts = () => async dispatch => {
   try {
     dispatch({ type: "CHANGE_LOADING_LATEST_PRODUCT", payload: true });
 
-    const response = await api.fetchProducts({});
+    const response = await api.fetchProducts({limit: 10});
 
     console.log(("response =>", response));
 
