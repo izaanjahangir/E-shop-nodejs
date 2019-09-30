@@ -4,6 +4,12 @@
   text-align: center;
 }
 
+.product-card-banner {
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+}
+
 .product-card .category {
   color: $lightGrey;
   text-align: center;

@@ -1,11 +1,20 @@
 const express = require("express");
 const path = require("path");
+const cors = require("cors");
+
 const app = express();
 
 require("dotenv").config();
 require("./config/db");
 
 const port = process.env.PORT;
+const corsWhitelist = "http://localhost:3000";
+
+const corsOptions = {
+  origin: corsWhitelist
+};
+
+app.use(cors(corsOptions));
 
 // middlewares
 app.use(express.urlencoded({ extended: false }));

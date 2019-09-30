@@ -6,21 +6,28 @@ import "./index.scss";
 
 const ProductCard = props => {
   const [rating, setRating] = useState(props.rating);
+  const data = props.data;
+
+  console.log("data =>", data);
 
   const onStarClick = value => setRating(value);
 
   return (
     <Card className="product-card" style={{ width: "18rem", ...props.style }}>
-      <Card.Img
-        variant="top"
-        src="http://www.drapersmaylands.com/MainFolder/home-banner/default-banner-mobile.jpg"
-      />
+      <div
+        className="product-card-banner"
+        style={{ backgroundImage: `url('${data.bannerImage}')` }}
+      ></div>
       <Card.Body className="pt-1">
-        <p className="category">Category</p>
-        <Card.Title className="title">Card Title</Card.Title>
+        <p className="category">{data.category.name}</p>
+        <Card.Title className="title">{data.title}</Card.Title>
         <div className="price-container">
-          <p className="discount active">$300</p>
-          <p className="real">$300</p>
+          {!!data.discountedPrice && (
+            <p className="discount active">{data.price}</p>
+          )}
+          <p className={"real" + !data.discountedPrice && "active"}>
+            {data.price}
+          </p>
         </div>
         <div style={{ fontSize: "24px" }}>
           <StarRatingComponent
@@ -51,7 +58,8 @@ ProductCard.defaultProps = {
   style: {},
   ratingEditing: false,
   rating: 0,
-  onExplore: function() {}
+  onExplore: function() {},
+  data: { category: {} }
 };
 
 export default ProductCard;

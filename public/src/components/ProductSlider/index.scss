@@ -4,10 +4,15 @@
   margin-right: 5px;
 }
 
-#product-slider-container > h1 {
+#product-slider-container > div {
+  margin-bottom: 10px;
+}
+
+#product-slider-container > div >  h1 {
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
   font-size: 1.7em;
+  margin-bottom: 0;
 }
 
 #product-slider-container .arrow-container {
