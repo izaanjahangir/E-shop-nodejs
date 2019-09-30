@@ -14,6 +14,8 @@
   color: white;
   align-items: center;
   min-height: 70px;
+  position: relative;
+  z-index: 2
 }
 
 #custom-header-container h3 {

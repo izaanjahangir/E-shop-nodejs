@@ -8,8 +8,6 @@ const ProductCard = props => {
   const [rating, setRating] = useState(props.rating);
   const data = props.data;
 
-  console.log("data =>", data);
-
   const onStarClick = value => setRating(value);
 
   return (
@@ -23,10 +21,10 @@ const ProductCard = props => {
         <Card.Title className="title">{data.title}</Card.Title>
         <div className="price-container">
           {!!data.discountedPrice && (
-            <p className="discount active">{data.price}</p>
+            <p className="discount active">{data.price}$</p>
           )}
           <p className={"real" + !data.discountedPrice && "active"}>
-            {data.price}
+            {data.price}$
           </p>
         </div>
         <div style={{ fontSize: "24px" }}>

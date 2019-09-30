@@ -1,0 +1,83 @@
+import React, { Component } from "react";
+import { Form, FormGroup, FormControl } from "react-bootstrap";
+
+import "./style.scss";
+
+class Filterbox extends Component {
+  state = {
+    category: "",
+    title: "",
+    price: 1000,
+    rating: ""
+  };
+
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  render() {
+    const { category, title, price, rating } = this.state;
+
+    return (
+      <div id="filter-box">
+        <Form>
+          <FormGroup>
+            <Form.Label>Category</Form.Label>
+            <FormControl
+              name="category"
+              value={category}
+              onChange={this.handleChange}
+              as="select"
+            >
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </FormControl>
+          </FormGroup>
+          <FormGroup>
+            <Form.Label>Title</Form.Label>
+            <FormControl
+              value={title}
+              onChange={this.handleChange}
+              name="title"
+              type="text"
+              placeholder="Search in title"
+            />
+          </FormGroup>
+          <FormGroup>
+            <Form.Label>Rating</Form.Label>
+            <FormControl
+              value={rating}
+              onChange={this.handleChange}
+              name="rating"
+              type="number"
+              min="0"
+              max="5"
+              step="0.5"
+              placeholder="Search by rating"
+            />
+          </FormGroup>
+          <FormGroup>
+            <Form.Label>Price</Form.Label>
+            <input
+              min="1000"
+              max="100000000"
+              onChange={this.handleChange}
+              name="price"
+              value={price}
+              type="range"
+              className="custom-range"
+            />
+            <div className="text-center price-slider-labels">
+              <span>{price}$</span>
+            </div>
+          </FormGroup>
+        </Form>
+      </div>
+    );
+  }
+}
+
+export default Filterbox;

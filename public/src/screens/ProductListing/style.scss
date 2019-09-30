@@ -1,0 +1,69 @@
+@import "../../variables.scss";
+
+#product-listing {
+  display: flex;
+  justify-content: center;
+}
+
+#product-listing > .filter {
+  width: 250px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  background: #6ab04c;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+#product-listing > div:first-child {
+  margin-right: $smallMargin;
+}
+
+#product-listing > .listing {
+  flex: 1;
+  margin-left: 220px;
+}
+
+#product-listing > .listing > div > div {
+  max-width: 240px;
+}
+
+@media (max-width: $mediumBreakpoint) {
+  #product-listing > .filter {
+    height: auto;
+    background: none;
+    color: black;
+    position: static;
+    display: block;
+  }
+
+  #product-listing {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #product-listing > div:first-child {
+    margin-right: 0;
+  }
+
+  #product-listing > div:last-child {
+    margin-left: 0;
+  }
+
+  #product-listing > .listing,
+  #product-listing > .filter {
+    width: 100%;
+  }
+
+  #product-listing > .listing > div {
+    justify-content: center;
+  }
+}
+
+@media (max-width: $extraSmallBreakpoint) {
+  #product-listing > .listing > div > div {
+    max-width: initial;
+  }
+}
