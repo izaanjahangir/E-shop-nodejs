@@ -1,6 +1,10 @@
+const mongoose = require("mongoose");
+
+const isValidMongooseId = id => mongoose.Types.ObjectId.isValid(id);
+
 const handleMongooseError = response => {
   let returnResponse = {};
-  
+
   if (response.name === "ValidationError") {
     const errorsArray = [];
     for (item in response.errors) {
@@ -16,5 +20,6 @@ const handleMongooseError = response => {
 };
 
 module.exports = {
-  handleMongooseError
+  handleMongooseError,
+  isValidMongooseId
 };

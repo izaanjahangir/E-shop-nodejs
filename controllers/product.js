@@ -60,6 +60,75 @@ const createProduct = async (req, res) => {
   images.forEach(item => fs.unlinkSync(item.path));
 };
 
+const findProduct = async (req, res) => {
+  try {
+    const skip = req.body.skip || 0;
+    const limit = req.body.limit || 5;
+
+    const query = {
+      category: req.body.category,
+      title: req.body.title,
+      rating: req.body.rating,
+      price: req.body.price,
+      features: req.body.features
+    };
+
+    if (query.category && !helpers.isValidMongooseId(query.category)) {
+      throw new Error("Category field should have a valid id!");
+    }
+
+    const productQuery = Product.find(queryBuilder(query))
+      .sort({ createdAt: 1 })
+      .skip(skip)
+      .limit(limit)
+      .populate("category")
+      .exec();
+
+    const productCount = Product.find(queryBuilder(query))
+      .countDocuments()
+      .exec();
+
+    const responsesArr = await Promise.all([productQuery, productCount]);
+
+    const data = { total: responsesArr[1], data: responsesArr[0] };
+
+    res.status(200).json(data);
+  } catch (e) {
+    const errors = helpers.handleMongooseError(e);
+
+    res.status(400).json(errors);
+  }
+};
+
+const queryBuilder = data => {
+  const query = {};
+
+  if (data.title) {
+    query.title = { $regex: `^${data.title}`, $options: "i" };
+  }
+
+  if (data.category) {
+    query.category = data.category;
+  }
+
+  if (data.rating) {
+    query.rating = { $gte: data.rating };
+  }
+
+  if (data.price) {
+    query.price = { $lte: data.price };
+  }
+
+  if (data.features) {
+    for (key in data.features) {
+      query[`features.${key}`] = data.features[key];
+    }
+  }
+
+  return query;
+};
+
 module.exports = {
-  createProduct
+  createProduct,
+  findProduct
 };

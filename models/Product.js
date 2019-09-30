@@ -27,5 +27,7 @@ const ProductSchema = new Schema(
   { timestamps: true, minimize: false }
 );
 
+// ProductSchema.index({ title: "text" });
+
 ProductSchema.plugin(uniqueValidator, { message: "{PATH} already exist." });
 module.exports = mongoose.model("product", ProductSchema);

@@ -1,5 +1,4 @@
 const fs = require("fs");
-const mongoose = require("mongoose");
 
 const Category = require("../models/Category");
 const helpers = require("../config/helpers");
@@ -41,7 +40,7 @@ const getCategoryById = async (req, res) => {
   try {
     const id = req.params.id;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
+    if (!helpers.isValidMongooseId(id)) {
       throw new Error("Please provide a valid id!");
     }
 

@@ -12,10 +12,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // routes
-app.use("/user", require("./route/user"));
-app.use("/admin", require("./route/admin"));
-app.use("/category", require("./route/category"));
-app.use("/product", require("./route/product"));
+app.use("/api/user", require("./route/user"));
+app.use("/api/admin", require("./route/admin"));
+app.use("/api/category", require("./route/category"));
+app.use("/api/product", require("./route/product"));
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === "production") {
