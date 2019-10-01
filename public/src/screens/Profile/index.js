@@ -88,7 +88,7 @@ class Profile extends Component {
     return (
       <div id="container">
         <Header />
-        <Container>
+        <Container id="profile">
           {!isLoading && user && (
             <Row className="my-3">
               <Col md={3}>
@@ -99,7 +99,7 @@ class Profile extends Component {
                   ></div>
                 </div>
               </Col>
-              <Col md={9}>
+              <Col md={9} className="profile-info">
                 <Tabs defaultActiveKey="basic">
                   <Tab eventKey="basic" title="Basic">
                     <Basic
@@ -111,7 +111,9 @@ class Profile extends Component {
                   {isSame && (
                     <Tab eventKey="security" title="Security">
                       <Security
-                        customRef={securityForm => (this.securityForm = securityForm)}
+                        customRef={securityForm =>
+                          (this.securityForm = securityForm)
+                        }
                         onSubmit={this.onSecuritySubmit}
                       />
                     </Tab>
