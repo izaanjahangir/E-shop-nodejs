@@ -49,7 +49,7 @@ const getUserById = async (req, res) => {
     console.log("e =>", e);
     const errors = helpers.handleMongooseError(e);
 
-    throw errors;
+    res.status(400).json(errors);
   }
 };
 
