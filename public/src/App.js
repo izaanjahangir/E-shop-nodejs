@@ -1,9 +1,22 @@
 import React from "react";
+import { connect } from "react-redux";
 
+import categoryActions from "./redux/category/action";
 import Router from "./config/router";
 
-function App() {
+function App(props) {
+  props.fetchAllCategories();
+
   return <Router />;
 }
 
-export default App;
+const mapStateToProps = () => ({});
+
+const mapDispatchToProps = {
+  fetchAllCategories: categoryActions.fetchAllCategories
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

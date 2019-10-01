@@ -26,7 +26,7 @@
   margin-left: 220px;
 }
 
-#product-listing > .listing > div > div {
+#product-listing > .listing > div > div > div {
   max-width: 240px;
 }
 
@@ -57,13 +57,13 @@
     width: 100%;
   }
 
-  #product-listing > .listing > div {
+  #product-listing > .listing > div > div {
     justify-content: center;
   }
 }
 
 @media (max-width: $extraSmallBreakpoint) {
-  #product-listing > .listing > div > div {
+  #product-listing > .listing > div > div > div {
     max-width: initial;
   }
 }

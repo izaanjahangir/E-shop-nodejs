@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
 import {
   Form,
@@ -9,42 +9,76 @@ import {
   Button
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { connect } from "react-redux";
 
 import constants from "../../config/constants";
 import "./index.scss";
 
-const Header = () => (
-  <div id="custom-header-container">
-    <Link className="header-brand" to="/">
-      <h3>Eshop</h3>
-    </Link>
-    <Form>
-      <InputGroup size="sm">
-        <DropdownButton
-          as={InputGroup.Prepend}
-          variant="outline-primary"
-          title="Dropdown"
-          id="input-group-dropdown-1"
-          size="sm"
-        >
-          <Dropdown.Item href="#">Action</Dropdown.Item>
-          <Dropdown.Item href="#">Another action</Dropdown.Item>
-          <Dropdown.Item href="#">Something else here</Dropdown.Item>
-          <Dropdown.Divider />
-          <Dropdown.Item href="#">Separated link</Dropdown.Item>
-        </DropdownButton>
-        <FormControl />
-        <InputGroup.Append>
-          <Button variant="danger">Search</Button>
-        </InputGroup.Append>
-      </InputGroup>
-    </Form>
-    <div id="header-icons">
-      <HeaderIcon count="5" text="Your wishlist" icon="faHeart" />
-      <HeaderIcon text="Your cart" icon="faShoppingCart" />
-    </div>
-  </div>
-);
+class Header extends Component {
+  state = {
+    title: "",
+    category: ""
+  };
+
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    const { category, title } = this.state;
+
+    this.props.history.push("/product", { category, title });
+  };
+
+  render() {
+    const { category, title } = this.state;
+
+    return (
+      <div id="custom-header-container">
+        <Link className="header-brand" to="/">
+          <h3>Eshop</h3>
+        </Link>
+        <Form onSubmit={this.handleSubmit}>
+          <InputGroup size="sm">
+            <FormControl
+              name="category"
+              as={InputGroup.Prepend}
+              value={category}
+              onChange={this.handleChange}
+              as="select"
+            >
+              <option value="" disabled>
+                Category
+              </option>
+              {this.props.allCategories.map(item => (
+                <option key={item._id} value={item._id}>
+                  {item.name}
+                </option>
+              ))}
+            </FormControl>
+            <FormControl
+              name="title"
+              placeholder="title"
+              value={title}
+              onChange={this.handleChange}
+            />
+            <InputGroup.Append>
+              <Button type="submit" variant="danger">
+                Search
+              </Button>
+            </InputGroup.Append>
+          </InputGroup>
+        </Form>
+        <div id="header-icons">
+          <HeaderIcon count="5" text="Your wishlist" icon="faHeart" />
+          <HeaderIcon text="Your cart" icon="faShoppingCart" />
+        </div>
+      </div>
+    );
+  }
+}
 
 const HeaderIcon = props => (
   <div className="d-flex flex-column align-items-center">
@@ -59,4 +93,15 @@ const HeaderIcon = props => (
   </div>
 );
 
-export default withRouter(Header);
+const mapStateToProps = state => ({
+  allCategories: state.category.allCategories
+});
+
+const mapDispatchToProps = {};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Header)
+);

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Form, FormGroup, FormControl } from "react-bootstrap";
+import { Form, FormGroup, FormControl, Button } from "react-bootstrap";
+import { connect } from "react-redux";
 
 import "./style.scss";
 
@@ -11,16 +12,22 @@ class Filterbox extends Component {
     rating: ""
   };
 
+  componentDidMount() {
+    console.log("this.props.defaultQuery =>", this.props.defaultQuery)
+    this.setState({ ...this.props.defaultQuery });
+  }
+
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
   render() {
     const { category, title, price, rating } = this.state;
+    const { allCategories, onSubmit } = this.props;
 
     return (
       <div id="filter-box">
-        <Form>
+        <Form onSubmit={e => onSubmit(e, { ...this.state })}>
           <FormGroup>
             <Form.Label>Category</Form.Label>
             <FormControl
@@ -29,11 +36,14 @@ class Filterbox extends Component {
               onChange={this.handleChange}
               as="select"
             >
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+              <option value="" disabled>
+                Search By Category
+              </option>
+              {allCategories.map(item => (
+                <option key={item._id} value={item._id}>
+                  {item.name}
+                </option>
+              ))}
             </FormControl>
           </FormGroup>
           <FormGroup>
@@ -74,10 +84,31 @@ class Filterbox extends Component {
               <span>{price}$</span>
             </div>
           </FormGroup>
+          <FormGroup>
+            <Button type="submit" variant="primary" block>
+              Search
+            </Button>
+          </FormGroup>
         </Form>
       </div>
     );
   }
 }
 
-export default Filterbox;
+Filterbox.defaultProps = {
+  onSubmit: function(e) {
+    e.preventDefault();
+  },
+  defaultQuery: {}
+};
+
+const mapStateToProps = state => ({
+  allCategories: state.category.allCategories
+});
+
+const mapDispatchToProps = {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Filterbox);
