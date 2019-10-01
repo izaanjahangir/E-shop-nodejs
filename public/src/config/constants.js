@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export default {
-  BASE_URL: "http://localhost:5000/api",
+  BASE_URL: "/api",
   icons: {
     faUser,
     faLock,
