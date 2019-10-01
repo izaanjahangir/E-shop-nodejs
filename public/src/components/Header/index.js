@@ -1,11 +1,6 @@
 import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
-import {
-  Form,
-  FormControl,
-  InputGroup,
-  Button
-} from "react-bootstrap";
+import { Form, FormControl, InputGroup, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
 
@@ -38,36 +33,38 @@ class Header extends Component {
         <Link className="header-brand" to="/">
           <h3>Eshop</h3>
         </Link>
-        <Form onSubmit={this.handleSubmit}>
-          <InputGroup size="sm">
-            <FormControl
-              name="category"
-              value={category}
-              onChange={this.handleChange}
-              as="select"
-            >
-              <option value="" disabled>
-                Category
-              </option>
-              {this.props.allCategories.map(item => (
-                <option key={item._id} value={item._id}>
-                  {item.name}
+        {this.props.search && (
+          <Form onSubmit={this.handleSubmit}>
+            <InputGroup size="sm">
+              <FormControl
+                name="category"
+                value={category}
+                onChange={this.handleChange}
+                as="select"
+              >
+                <option value="" disabled>
+                  Category
                 </option>
-              ))}
-            </FormControl>
-            <FormControl
-              name="title"
-              placeholder="title"
-              value={title}
-              onChange={this.handleChange}
-            />
-            <InputGroup.Append>
-              <Button type="submit" variant="danger">
-                Search
-              </Button>
-            </InputGroup.Append>
-          </InputGroup>
-        </Form>
+                {this.props.allCategories.map(item => (
+                  <option key={item._id} value={item._id}>
+                    {item.name}
+                  </option>
+                ))}
+              </FormControl>
+              <FormControl
+                name="title"
+                placeholder="title"
+                value={title}
+                onChange={this.handleChange}
+              />
+              <InputGroup.Append>
+                <Button type="submit" variant="danger">
+                  Search
+                </Button>
+              </InputGroup.Append>
+            </InputGroup>
+          </Form>
+        )}
         <div id="header-icons">
           <HeaderIcon count="5" text="Your wishlist" icon="faHeart" />
           <HeaderIcon text="Your cart" icon="faShoppingCart" />
@@ -89,6 +86,10 @@ const HeaderIcon = props => (
     <p>{props.text}</p>
   </div>
 );
+
+Header.defaultProps = {
+  search: true
+};
 
 const mapStateToProps = state => ({
   allCategories: state.category.allCategories

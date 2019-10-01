@@ -76,7 +76,7 @@ class ProductListing extends Component {
 
     return (
       <div id="container">
-        <Header />
+        <Header search={false} />
         <Container>
           <div className="my-3 mx-4">
             <div id="product-listing">
