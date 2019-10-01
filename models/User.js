@@ -21,7 +21,8 @@ const UserSchema = new Schema({
   },
   password: String,
   profilePicture: String,
-  tokens: Array
+  tokens: Array,
+  lastPasswordChanged: Number
 });
 
 UserSchema.methods.toJSON = function() {
@@ -30,6 +31,18 @@ UserSchema.methods.toJSON = function() {
   delete user.password;
   delete user.tokens;
 
+  return user;
+};
+
+UserSchema.methods.getPublicProfile = function() {
+  const user = this.toObject();
+
+  delete user.password;
+  delete user.tokens;
+  delete user.email;
+  delete user.role;
+  delete user.lastPasswordChanged;
+  
   return user;
 };
 
