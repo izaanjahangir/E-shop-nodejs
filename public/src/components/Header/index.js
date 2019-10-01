@@ -21,8 +21,8 @@ class Header extends Component {
     category: ""
   };
 
-  componentDidUpdate() {
-    if (!this.props.user) {
+  componentDidUpdate(prevProps) {
+    if (prevProps.user && !this.props.user) {
       this.props.history.replace("/login");
     }
   }
