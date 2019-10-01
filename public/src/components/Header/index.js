@@ -4,8 +4,6 @@ import {
   Form,
   FormControl,
   InputGroup,
-  DropdownButton,
-  Dropdown,
   Button
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -44,7 +42,6 @@ class Header extends Component {
           <InputGroup size="sm">
             <FormControl
               name="category"
-              as={InputGroup.Prepend}
               value={category}
               onChange={this.handleChange}
               as="select"

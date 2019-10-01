@@ -9,17 +9,6 @@ import Spinner from "../../components/Spinner";
 import ProductCard from "../../components/ProductCard";
 import Filterbox from "../../components/Filterbox";
 
-const fakeData = {
-  bannerImage:
-    "http://res.cloudinary.com/deot6gwx4/image/upload/v1569790691/products/5d911ada28c66146d86def7e/apple-desk-internet-209151-1569790682440.jpg",
-  title: "Macbook Air 2018",
-  category: {
-    name: "Laptops"
-  },
-  price: "800",
-  discountedPrice: 0
-};
-
 class ProductListing extends Component {
   constructor(props) {
     super(props);
@@ -67,7 +56,7 @@ class ProductListing extends Component {
       query.limit = 10;
 
       const response = await api.fetchProducts(query);
-  
+
       this.setState({ data: response.data });
     } catch (e) {
       console.log("e =>", e);
