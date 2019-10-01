@@ -5,7 +5,7 @@ import Ink from "react-ink";
 const Button = props => (
   <BootstrapButton className="position-relative" {...props}>
     <span>{props.value}</span>
-    <Ink />
+    {!props.disabled && <Ink />}
   </BootstrapButton>
 );
 

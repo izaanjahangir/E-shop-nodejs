@@ -47,7 +47,7 @@ class Basic extends Component {
             value={username}
             disabled
           />
-          <FormText>Username can't be changed</FormText>
+          {isSame && <FormText>Username can't be changed</FormText>}
         </FormGroup>
         <FormGroup>
           <FormLabel htmlFor="firstName">First Name</FormLabel>
@@ -73,22 +73,26 @@ class Basic extends Component {
             disabled={!isSame}
           />
         </FormGroup>
-        <FormGroup>
-          <FormLabel htmlFor="email">Email</FormLabel>
-          <FormControl
-            name="email"
-            id="email"
-            onChange={this.handleChange}
-            type="text"
-            placeholder="Enter your email"
-            value={email}
-            disabled
-          />
-          <FormText>Email can't be changed</FormText>
-        </FormGroup>
-        <FormGroup>
-          <Button disabled={!isSame} type="submit" value="Change" />
-        </FormGroup>
+        {isSame && (
+          <FormGroup>
+            <FormLabel htmlFor="email">Email</FormLabel>
+            <FormControl
+              name="email"
+              id="email"
+              onChange={this.handleChange}
+              type="text"
+              placeholder="Enter your email"
+              value={email}
+              disabled
+            />
+            <FormText>Email can't be changed</FormText>
+          </FormGroup>
+        )}
+        {isSame && (
+          <FormGroup>
+            <Button disabled={!isSame} type="submit" value="Change" />
+          </FormGroup>
+        )}
       </Form>
     );
   }

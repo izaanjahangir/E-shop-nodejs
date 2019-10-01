@@ -10,6 +10,10 @@ class Security extends Component {
     confirmPassword: ""
   };
 
+  componentDidMount = () => {
+    this.props.customRef({ resetForm: this.resetForm });
+  };
+
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -22,6 +26,10 @@ class Security extends Component {
     this.props.onSubmit({ oldPassword, newPassword, confirmPassword });
   };
 
+  resetForm = () => {
+    this.setState({ oldPassword: "", newPassword: "", confirmPassword: "" });
+  };
+
   render() {
     const { oldPassword, newPassword, confirmPassword } = this.state;
 
@@ -32,6 +40,7 @@ class Security extends Component {
           <FormControl
             type="password"
             name="oldPassword"
+            onChange={this.handleChange}
             id="oldPassword"
             value={oldPassword}
             placeholder="Enter your old password"
@@ -42,6 +51,7 @@ class Security extends Component {
           <FormControl
             type="password"
             name="newPassword"
+            onChange={this.handleChange}
             id="newPassword"
             value={newPassword}
             placeholder="Enter your new password"
@@ -52,6 +62,7 @@ class Security extends Component {
           <FormControl
             type="password"
             name="confirmPassword"
+            onChange={this.handleChange}
             id="confirmPassword"
             value={confirmPassword}
             placeholder="Re-enter your new password"
@@ -66,7 +77,8 @@ class Security extends Component {
 }
 
 Security.defaultProps = {
-  onSubmit: function() {}
+  onSubmit: function() {},
+  ref: function() {}
 };
 
 export default Security;
