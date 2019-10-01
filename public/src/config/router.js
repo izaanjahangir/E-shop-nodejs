@@ -6,6 +6,7 @@ import ProductDetails from "../screens/ProductDetails";
 import ProductListing from "../screens/ProductListing";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
+import Profile from "../screens/Profile";
 
 export default () => (
   <BrowserRouter>
@@ -14,5 +15,6 @@ export default () => (
     <Route path="/product/:id" exact component={ProductDetails} />
     <Route path="/login" exact component={Login} />
     <Route path="/register" exact component={Register} />
+    <Route path="/user/:id" exact component={Profile} />
   </BrowserRouter>
 );
