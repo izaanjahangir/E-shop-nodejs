@@ -17,8 +17,8 @@ const storage = multer.diskStorage({
   }
 });
 
+router.get("/", categoryController.getAllCategories)
 router.get("/:id", categoryController.getCategoryById);
-
 router.post(
   "/create",
   isAdmin,

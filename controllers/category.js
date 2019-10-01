@@ -4,6 +4,18 @@ const Category = require("../models/Category");
 const helpers = require("../config/helpers");
 const cloudnary = require("../services/cloudnary");
 
+const getAllCategories = async (_, res) => {
+  try {
+    const categories = await Category.find({});
+
+    res.status(200).json(categories);
+  } catch (e) {
+    const errors = helpers.handleMongooseError(e);
+
+    res.status(400).send(errors);
+  }
+};
+
 const createCategory = async (req, res) => {
   try {
     const payload = {
@@ -59,6 +71,7 @@ const getCategoryById = async (req, res) => {
   }
 };
 module.exports = {
+  getAllCategories,
   createCategory,
   getCategoryById
 };
