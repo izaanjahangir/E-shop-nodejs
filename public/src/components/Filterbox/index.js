@@ -13,7 +13,6 @@ class Filterbox extends Component {
   };
 
   componentDidMount() {
-    console.log("this.props.defaultQuery =>", this.props.defaultQuery)
     this.setState({ ...this.props.defaultQuery });
   }
 

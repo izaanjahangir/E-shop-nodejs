@@ -11,7 +11,7 @@
   left: 0;
   top: 0;
   height: 100vh;
-  background: #6ab04c;
+  background: $success;
   color: white;
   display: flex;
   align-items: center;
@@ -37,6 +37,7 @@
     color: black;
     position: static;
     display: block;
+    padding-top: 0 !important;
   }
 
   #product-listing {

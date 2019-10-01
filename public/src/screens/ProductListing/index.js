@@ -80,7 +80,7 @@ class ProductListing extends Component {
         <Container>
           <div className="my-3 mx-4">
             <div id="product-listing">
-              <div className="filter">
+              <div className="filter pt-5">
                 <Filterbox defaultQuery={query} onSubmit={this.handleSubmit} />
               </div>
               <div className="listing">

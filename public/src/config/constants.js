@@ -5,7 +5,8 @@ import {
   faHeart,
   faShoppingCart,
   faArrowAltCircleRight,
-  faArrowAltCircleLeft
+  faArrowAltCircleLeft,
+  faCaretDown
 } from "@fortawesome/free-solid-svg-icons";
 
 export default {
@@ -17,6 +18,7 @@ export default {
     faHeart,
     faShoppingCart,
     faArrowAltCircleRight,
-    faArrowAltCircleLeft
+    faArrowAltCircleLeft,
+    faCaretDown
   }
 };
