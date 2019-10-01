@@ -1,16 +1,24 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
+import authActions from "../../redux/auth/action";
 import CustomInputLarge from "../../components/CustomInputLarge";
 import CustomButtonLarge from "../../components/CustomButtonLarge";
 import AuthBackground from "../../components/AuthBackground";
 
-export default class Login extends Component {
+class Login extends Component {
   state = {
     username: "",
     password: ""
   };
+
+  componentDidMount() {
+    if (this.props.user) {
+      this.props.history.replace("/");
+    }
+  }
 
   handleTextChange = e => {
     const name = e.target.name;
@@ -18,6 +26,23 @@ export default class Login extends Component {
 
     this.setState({ [name]: value });
   };
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    const { username, password } = this.state;
+    const { login } = this.props;
+
+    const credentials = { email: username, password };
+
+    login(credentials);
+  };
+
+  componentDidUpdate() {
+    if (this.props.user) {
+      this.props.history.replace("/");
+    }
+  }
 
   render() {
     const { username, password } = this.state;
@@ -28,7 +53,7 @@ export default class Login extends Component {
         <Container className="h-100 d-flex justify-content-center">
           <Row className="w-100 justify-content-center">
             <Col md={6} lg={5}>
-              <Form>
+              <Form onSubmit={this.handleSubmit}>
                 <div className="text-center my-4">
                   <img
                     src={require("../../assets/images/default-profile.png")}
@@ -54,13 +79,17 @@ export default class Login extends Component {
                   placeholder="Password"
                   onChange={this.handleTextChange}
                 />
-                <CustomButtonLarge text="Login" />
+                <CustomButtonLarge type="submit" text="Login" />
                 <div className="my-3 text-center">
                   <Link className="link" to="/register">
                     Don't have an account? Register
                   </Link>
                 </div>
               </Form>
+              <CustomButtonLarge
+                onClick={() => this.props.history.push("/")}
+                text="Continue as guest"
+              />
             </Col>
           </Row>
         </Container>
@@ -68,3 +97,14 @@ export default class Login extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({ user: state.auth.user });
+
+const mapDispatchToProps = {
+  login: authActions.login
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);

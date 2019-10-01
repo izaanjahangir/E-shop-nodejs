@@ -5,7 +5,13 @@ import Ink from "react-ink";
 import "./index.scss";
 
 const CustomButtonLarge = props => (
-  <Button className="custom-button-large" block={props.block} size="lg">
+  <Button
+    type={props.type}
+    onClick={props.onClick}
+    className="custom-button-large"
+    block={props.block}
+    size="lg"
+  >
     {props.text}
     <Ink />
   </Button>
@@ -13,7 +19,9 @@ const CustomButtonLarge = props => (
 
 CustomButtonLarge.defaultProps = {
   text: "",
-  block: true
+  type: "button",
+  block: true,
+  onClick: function(){}
 };
 
 export default CustomButtonLarge;

@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
 import Ink from "react-ink";
 
+import authActions from "../../redux/auth/action";
 import constants from "../../config/constants";
 import "./index.scss";
 
@@ -19,6 +20,12 @@ class Header extends Component {
     title: "",
     category: ""
   };
+
+  componentDidUpdate() {
+    if (!this.props.user) {
+      this.props.history.replace("/login");
+    }
+  }
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -34,7 +41,7 @@ class Header extends Component {
 
   render() {
     const { category, title } = this.state;
-    const { user } = this.props;
+    const { user, logout } = this.props;
 
     return (
       <div id="custom-header">
@@ -64,7 +71,11 @@ class Header extends Component {
                   </p>
                 </div>
                 <Dropdown.Divider />
-                <Dropdown.Item as="button" className="btn btn-danger">
+                <Dropdown.Item
+                  onClick={logout}
+                  as="button"
+                  className="btn btn-danger"
+                >
                   Logout
                 </Dropdown.Item>
               </Dropdown.Menu>
@@ -172,7 +183,9 @@ const mapStateToProps = state => ({
   user: state.auth.user
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  logout: authActions.logout
+};
 
 export default withRouter(
   connect(

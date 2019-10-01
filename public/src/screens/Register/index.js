@@ -46,9 +46,9 @@ export default class Register extends Component {
     } = this.state;
 
     return (
-      <div className="full-height">
+      <div>
         <AuthBackground />
-        <Container className="h-100 d-flex justify-content-center">
+        <Container className="mb-3 d-flex justify-content-center">
           <div style={{ maxWidth: "700px" }}>
             <Form className="my-4">
               <Row>
@@ -158,6 +158,10 @@ export default class Register extends Component {
                 </Col>
               </Row>
             </Form>
+            <CustomButtonLarge
+              onClick={() => this.props.history.push("/")}
+              text="Continue as guest"
+            />
           </div>
         </Container>
       </div>

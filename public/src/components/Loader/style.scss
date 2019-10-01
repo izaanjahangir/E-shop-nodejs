@@ -1,0 +1,28 @@
+@import "../../variables.scss";
+
+#loader {
+  display: flex;
+  align-items: center;
+  color: white;
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  background: $black;
+  padding: $extraSmallPadding $smallPadding;
+  width: 250px;
+  animation: slider-right 200ms forwards 1 linear;
+}
+
+#loader > p {
+  margin: 0;
+}
+
+@keyframes slider-right {
+  0% {
+    right: -250px;
+  }
+
+  100% {
+    right: 15;
+  }
+}
