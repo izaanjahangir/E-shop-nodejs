@@ -6,7 +6,8 @@ import {
   faShoppingCart,
   faArrowAltCircleRight,
   faArrowAltCircleLeft,
-  faCaretDown
+  faCaretDown,
+  faTrashAlt
 } from "@fortawesome/free-solid-svg-icons";
 
 let BASE_URL = "/api";
@@ -25,6 +26,7 @@ export default {
     faShoppingCart,
     faArrowAltCircleRight,
     faArrowAltCircleLeft,
-    faCaretDown
+    faCaretDown,
+    faTrashAlt
   }
 };

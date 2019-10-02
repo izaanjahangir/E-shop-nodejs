@@ -124,7 +124,11 @@ class Header extends Component {
           )}
           <div id="header-icons">
             <HeaderIcon count="5" text="Your wishlist" icon="faHeart" />
-            <HeaderIcon text="Your cart" icon="faShoppingCart" />
+            <HeaderIcon
+              onClick={() => this.props.history.push("/user/cart")}
+              text="Your cart"
+              icon="faShoppingCart"
+            />
           </div>
         </div>
       </div>
@@ -133,7 +137,10 @@ class Header extends Component {
 }
 
 const HeaderIcon = props => (
-  <div className="d-flex flex-column align-items-center">
+  <div
+    onClick={props.onClick}
+    className="d-flex flex-column align-items-center pointer position-relative"
+  >
     <div className="position-relative">
       {props.count && <div className="count">{props.count}</div>}
       <FontAwesomeIcon
@@ -142,6 +149,7 @@ const HeaderIcon = props => (
       />
     </div>
     <p>{props.text}</p>
+    <Ink />
   </div>
 );
 
