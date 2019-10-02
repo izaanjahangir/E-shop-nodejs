@@ -1,14 +1,17 @@
-import React, { useState } from "react";
-import { Card, Button } from "react-bootstrap";
-import StarRatingComponent from "react-star-rating-component";
+import React from "react";
+import { Card } from "react-bootstrap";
+// import StarRatingComponent from "react-star-rating-component";
+import { connect } from "react-redux";
 
+import Button from "../Button";
+import cartActions from "../../redux/cart/action";
 import "./index.scss";
 
 const ProductCard = props => {
-  const [rating, setRating] = useState(props.rating);
+  // const [rating, setRating] = useState(props.rating);
   const data = props.data;
 
-  const onStarClick = value => setRating(value);
+  // const onStarClick = value => setRating(value);
 
   return (
     <Card className="product-card" style={{ width: "18rem", ...props.style }}>
@@ -27,7 +30,7 @@ const ProductCard = props => {
             {data.price}$
           </p>
         </div>
-        <div style={{ fontSize: "24px" }}>
+        {/* <div style={{ fontSize: "24px" }}>
           <StarRatingComponent
             name="rate1"
             starCount={5}
@@ -35,18 +38,22 @@ const ProductCard = props => {
             onStarClick={onStarClick}
             editing={props.ratingEditing}
           />
-        </div>
+        </div> */}
         <Button
           size="sm"
           variant="primary"
           className="mr-1"
           onClick={() => props.onExplore(data._id)}
-        >
-          Explore
-        </Button>
-        <Button size="sm" variant="danger" className="ml-1">
-          Add To Cart
-        </Button>
+          value="Explore"
+        />
+        <Button
+          onClick={() => props.addToCart(data)}
+          size="sm"
+          variant="danger"
+          className="ml-1"
+          disabled={!props.user}
+          value="Add To Cart"
+        />
       </Card.Body>
     </Card>
   );
@@ -60,4 +67,15 @@ ProductCard.defaultProps = {
   data: { category: {} }
 };
 
-export default ProductCard;
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
+
+const mapDispatchToProps = {
+  addToCart: cartActions.addToCart
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductCard);

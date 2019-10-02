@@ -8,9 +8,11 @@ import {
   Table,
   Button
 } from "react-bootstrap";
-import StarRatingComponent from "react-star-rating-component";
+import { connect } from "react-redux";
+// import StarRatingComponent from "react-star-rating-component";
 
 import "./style.scss";
+import cartActions from "../../redux/cart/action";
 import api from "../../config/api";
 import Header from "../../components/Header";
 import Spinner from "../../components/Spinner";
@@ -68,7 +70,8 @@ class ProductDetails extends Component {
   };
 
   render() {
-    const { ratingEditing, isLoading, data } = this.state;
+    const { isLoading, data } = this.state;
+    const { user } = this.props;
 
     return (
       <div id="container">
@@ -121,7 +124,7 @@ class ProductDetails extends Component {
                     )}
                     <span>{data.price}$</span>
                   </ListGroupItem>
-                  <ListGroupItem>
+                  {/* <ListGroupItem>
                     <div
                       className="d-flex justify-content-center"
                       style={{ fontSize: "24px" }}
@@ -134,12 +137,17 @@ class ProductDetails extends Component {
                         editing={ratingEditing}
                       />
                     </div>
-                  </ListGroupItem>
+                  </ListGroupItem> */}
                   <ListGroupItem>
-                    <Button variant="danger" block>
+                    {/* <Button variant="danger" block>
                       Add to Wishlist
-                    </Button>
-                    <Button variant="primary" block>
+                    </Button> */}
+                    <Button
+                      onClick={() => this.props.addToCart(data)}
+                      disabled={!user}
+                      variant="primary"
+                      block
+                    >
                       Add to Cart
                     </Button>
                   </ListGroupItem>
@@ -154,4 +162,13 @@ class ProductDetails extends Component {
   }
 }
 
-export default ProductDetails;
+const mapStateToProps = state => ({ user: state.auth.user });
+
+const mapDispatchToProps = {
+  addToCart: cartActions.addToCart
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductDetails);

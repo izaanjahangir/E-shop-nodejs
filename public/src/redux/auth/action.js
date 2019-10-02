@@ -9,6 +9,7 @@ const login = credentials => async dispatch => {
 
     const response = await api.login(credentials);
 
+    dispatch({ type: "CLEAR_CART" });
     dispatch({ type: "USER_LOGIN", payload: response });
   } catch (e) {
     console.log("e =>", e);
@@ -19,6 +20,7 @@ const login = credentials => async dispatch => {
 
 const logout = () => dispatch => {
   try {
+    dispatch({ type: "CLEAR_CART" });
     dispatch({ type: "USER_LOGOUT" });
   } catch (e) {
     console.log("e =>", e);

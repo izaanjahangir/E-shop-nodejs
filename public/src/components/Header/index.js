@@ -123,12 +123,15 @@ class Header extends Component {
             </Form>
           )}
           <div id="header-icons">
-            <HeaderIcon count="5" text="Your wishlist" icon="faHeart" />
-            <HeaderIcon
-              onClick={() => this.props.history.push("/user/cart")}
-              text="Your cart"
-              icon="faShoppingCart"
-            />
+            {/* <HeaderIcon count="5" text="Your wishlist" icon="faHeart" /> */}
+            {user && (
+              <HeaderIcon
+                onClick={() => this.props.history.push("/user/cart")}
+                text="Your cart"
+                count={this.props.cart.length}
+                icon="faShoppingCart"
+              />
+            )}
           </div>
         </div>
       </div>
@@ -142,7 +145,7 @@ const HeaderIcon = props => (
     className="d-flex flex-column align-items-center pointer position-relative"
   >
     <div className="position-relative">
-      {props.count && <div className="count">{props.count}</div>}
+      {!!props.count && <div className="count">{props.count}</div>}
       <FontAwesomeIcon
         className="heart-icon"
         icon={constants.icons[props.icon]}
@@ -188,7 +191,8 @@ Header.defaultProps = {
 
 const mapStateToProps = state => ({
   allCategories: state.category.allCategories,
-  user: state.auth.user
+  user: state.auth.user,
+  cart: state.cart.cart
 });
 
 const mapDispatchToProps = {
