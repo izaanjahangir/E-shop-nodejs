@@ -57,8 +57,19 @@ class Profile extends Component {
     this.setState({ isLoading: false });
   };
 
-  onBasicSubmit = newProfile => {
-    console.log("newProfile =>", newProfile);
+  onBasicSubmit = async newProfile => {
+    const { startLoading, stopLoading, token } = this.props;
+    try {
+      console.log("newProfile =>", newProfile);
+      startLoading();
+
+      const response = await api.updateUser(newProfile, token);
+      console.log("response =>", response);
+    } catch (e) {
+      console.log("e =>", e);
+    }
+
+    stopLoading();
   };
 
   onSecuritySubmit = async newCredentials => {

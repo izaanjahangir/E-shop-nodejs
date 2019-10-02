@@ -1,11 +1,15 @@
 import constants from "./constants";
 
-const fetchApi = async (route, method, body, authorization) => {
+const fetchApi = async (route, method, body, authorization, type) => {
   try {
     const url = constants.BASE_URL + route;
     const headers = {
       "Content-Type": "application/json"
     };
+
+    if (type === "form-data") {
+      delete headers["Content-Type"];
+    }
 
     const options = {
       method
@@ -14,6 +18,11 @@ const fetchApi = async (route, method, body, authorization) => {
     if (method !== "GET") {
       options.headers = headers;
       options.body = JSON.stringify(body);
+    }
+
+    if (type === "form-data") {
+      delete options.body;
+      options.body = body;
     }
 
     if (authorization) {

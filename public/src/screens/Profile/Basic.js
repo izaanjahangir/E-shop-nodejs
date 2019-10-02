@@ -25,9 +25,13 @@ class Basic extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    const { username, email, firstName, lastName } = this.state;
+    const { firstName, lastName } = this.state;
+    const formData = new FormData();
 
-    this.props.onSubmit({ username, email, firstName, lastName });
+    if (firstName) formData.append("firstName", firstName);
+    if (lastName) formData.append("lastName", lastName);
+
+    this.props.onSubmit(formData);
   };
 
   render() {
