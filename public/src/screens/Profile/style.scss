@@ -1,21 +1,7 @@
 @import "../../variables.scss";
 
-.profile-wrapper {
-  width: 200px;
-  height: 200px;
-  border-radius: 100%;
-}
-
-.profile-wrapper > .profile-picture {
-  height: 100%;
-  width: 100%;
-  border-radius: 100%;
-  background-size: cover;
-  background-position: center;
-}
-
 @media (max-width: $mediumBreakpoint) {
-  .profile-wrapper {
+  #profile > .row > div:first-child > .profile-wrapper {
     width: 150px;
     height: 150px;
   }

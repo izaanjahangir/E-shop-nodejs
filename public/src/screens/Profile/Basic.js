@@ -18,6 +18,12 @@ class Basic extends Component {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    if (JSON.stringify(this.props.user) !== JSON.stringify(prevProps.user)) {
+      this.setState({ ...this.props.user });
+    }
+  }
+
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };

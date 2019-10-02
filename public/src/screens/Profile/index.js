@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Container, Row, Col, Tabs, Tab } from "react-bootstrap";
 
+import Avatar from "../../components/Avatar";
 import loaderActions from "../../redux/loading/action";
+import authActions from "../../redux/auth/action";
 import api from "../../config/api";
 import Basic from "./Basic";
 import Security from "./Security";
@@ -41,6 +43,12 @@ class Profile extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (JSON.stringify(this.props.user) !== JSON.stringify(prevProps.user)) {
+      this.setState({ user: this.props.user });
+    }
+  }
+
   fetchUser = async () => {
     const { id } = this.state;
 
@@ -58,13 +66,34 @@ class Profile extends Component {
   };
 
   onBasicSubmit = async newProfile => {
-    const { startLoading, stopLoading, token } = this.props;
+    const { startLoading, stopLoading, token, updateUser } = this.props;
     try {
       console.log("newProfile =>", newProfile);
       startLoading();
 
       const response = await api.updateUser(newProfile, token);
       console.log("response =>", response);
+
+      updateUser(response);
+    } catch (e) {
+      console.log("e =>", e);
+    }
+
+    stopLoading();
+  };
+
+  handleAvatarUpload = async file => {
+    const { startLoading, stopLoading, token, updateUser } = this.props;
+
+    try {
+      startLoading();
+
+      const formdata = new FormData();
+      formdata.append("image", file);
+
+      const response = await api.updateUser(formdata, token);
+
+      updateUser(response);
     } catch (e) {
       console.log("e =>", e);
     }
@@ -103,12 +132,12 @@ class Profile extends Component {
           {!isLoading && user && (
             <Row className="my-3">
               <Col md={3}>
-                <div className="profile-wrapper">
-                  <div
-                    style={{ backgroundImage: `url('${user.profilePicture}')` }}
-                    className="profile-picture"
-                  ></div>
-                </div>
+                <Avatar
+                  allowInput={true}
+                  onSelect={this.handleAvatarUpload}
+                  id="profile-picture"
+                  url={user.profilePicture}
+                />
               </Col>
               <Col md={9} className="profile-info">
                 <Tabs defaultActiveKey="basic">
@@ -147,7 +176,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   startLoading: loaderActions.startLoading,
-  stopLoading: loaderActions.stopLoading
+  stopLoading: loaderActions.stopLoading,
+  updateUser: authActions.updateUser
 };
 
 export default connect(
