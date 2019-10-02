@@ -133,7 +133,7 @@ class Profile extends Component {
             <Row className="my-3">
               <Col md={3}>
                 <Avatar
-                  allowInput={true}
+                  allowInput={isSame}
                   onSelect={this.handleAvatarUpload}
                   id="profile-picture"
                   url={user.profilePicture}
