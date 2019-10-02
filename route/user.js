@@ -26,5 +26,11 @@ router.post(
 );
 router.post("/login", userController.login);
 router.post("/changepassword", isAuthenticated, userController.changePassword);
+router.post(
+  "/update",
+  isAuthenticated,
+  multer({ storage }).single("image"),
+  userController.updateUser
+);
 
 module.exports = router;

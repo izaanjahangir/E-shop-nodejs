@@ -6,3 +6,7 @@ mongoose
   .catch(err => console.log("error in MONGODB =>", err));
 
 mongoose.set("useCreateIndex", true);
+
+// Make Mongoose use `findOneAndUpdate()`. Note that this option is `true`
+// by default, you need to set it to false.
+mongoose.set("useFindAndModify", false);

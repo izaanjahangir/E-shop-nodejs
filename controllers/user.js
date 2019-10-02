@@ -1,5 +1,7 @@
-const User = require("../models/User");
+const fs = require("fs");
 
+const User = require("../models/User");
+const cloudnary = require("../services/cloudnary");
 const helpers = require("../config/helpers");
 const auth = require("../services/auth");
 
@@ -71,10 +73,51 @@ const changePassword = async (req, res) => {
   }
 };
 
+const updateUser = async (req, res) => {
+  try {
+    const _id = req.user;
+    const payload = req.body;
+
+    if (!helpers.isValidMongooseId(_id))
+      throw new Error("Please provide a valid id!");
+
+    if (req.file) {
+      const path = `users/${_id}`;
+      const uploadResponse = await cloudnary.uploadImage(req.file, path);
+
+      payload.profilePicture = uploadResponse.url;
+
+      // delete uploaded image from filesystem
+      fs.unlinkSync(req.file.path);
+    }
+
+    delete payload.username;
+    delete payload.email;
+    delete payload.password;
+    delete payload.lastPasswordChanged;
+    delete payload.role;
+    delete payload._id;
+
+    const response = await User.findOneAndUpdate({ _id }, payload, {
+      returnOriginal: false
+    });
+
+    if (!response) throw new Error("No user found!");
+
+    res.status(200).json(response);
+  } catch (e) {
+    console.log("e =>", e);
+    const errors = helpers.handleMongooseError(e);
+
+    res.status(400).json(errors);
+  }
+};
+
 module.exports = {
   register,
   login,
   getUser,
   changePassword,
-  getUserById
+  getUserById,
+  updateUser
 };
