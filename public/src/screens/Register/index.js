@@ -50,7 +50,7 @@ export default class Register extends Component {
         <AuthBackground />
         <Container className="mb-3 d-flex justify-content-center">
           <div style={{ maxWidth: "700px" }}>
-            <Form className="my-4">
+            <Form className="mt-4">
               <Row>
                 <Col xs={12}>
                   <div className="text-center">

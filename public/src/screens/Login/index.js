@@ -51,8 +51,8 @@ class Login extends Component {
       <div className="full-height">
         <AuthBackground />
         <Container className="h-100 d-flex justify-content-center">
-          <Row className="w-100 justify-content-center">
-            <Col md={6} lg={5}>
+          <Row className="w-100 justify-content-center align-items-center">
+            <Col md={8} lg={5}>
               <Form onSubmit={this.handleSubmit}>
                 <div className="text-center my-4">
                   <img
