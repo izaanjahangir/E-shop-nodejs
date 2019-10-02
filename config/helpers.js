@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
+const mkdirp = require("mkdirp");
 
 const isValidMongooseId = id => mongoose.Types.ObjectId.isValid(id);
+
+const makeFolder = path => mkdirp(path);
 
 const handleMongooseError = response => {
   let returnResponse = {};
@@ -21,5 +24,6 @@ const handleMongooseError = response => {
 
 module.exports = {
   handleMongooseError,
-  isValidMongooseId
+  isValidMongooseId,
+  makeFolder
 };

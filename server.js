@@ -2,10 +2,14 @@ const express = require("express");
 const path = require("path");
 const cors = require("cors");
 
+const helpers = require("./config/helpers");
 const app = express();
 
 require("dotenv").config();
 require("./config/db");
+
+// create blank folder named "uploads" for images uploads
+helpers.makeFolder(path.resolve(__dirname, "uploads"));
 
 const port = process.env.PORT;
 const corsWhitelist = "http://localhost:3000";
