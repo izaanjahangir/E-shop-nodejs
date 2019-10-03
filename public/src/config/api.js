@@ -1,6 +1,7 @@
 import helpers from "./helpers";
 
 const login = body => helpers.fetchApi("/user/login", "POST", body);
+const register = body => helpers.fetchApi("/user/register", "POST", body);
 const updateUser = (body, token) =>
   helpers.fetchApi("/user/update", "POST", body, token, "form-data");
 const fetchProducts = body => helpers.fetchApi("/product/find", "POST", body);
@@ -15,6 +16,7 @@ const charge = (body, token) =>
 
 export default {
   login,
+  register,
   fetchProducts,
   fetchAllCategories,
   fetchProductById,

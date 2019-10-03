@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal } from "react-bootstrap";
+import { Modal, Alert } from "react-bootstrap";
 import { CardElement, injectStripe } from "react-stripe-elements";
 import { connect } from "react-redux";
 import loadingActions from "../../redux/loading/action";
@@ -41,6 +41,13 @@ class PaymentForm extends Component {
           <Modal.Title>Payment form</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <Alert variant="info">
+            <p>Payments are in test mode. Use any of these</p>
+            <p>4242 4242 4242 4242 (Visa)</p>
+            <p>4000 0566 5566 5556 (Visa debit)</p>
+            <p>5555 5555 5555 4444 (Mastercard)</p>
+            <p>5200 8282 8282 8210 (Mastercard debit)</p>
+          </Alert>
           <CardElement />
         </Modal.Body>
         <Modal.Footer>

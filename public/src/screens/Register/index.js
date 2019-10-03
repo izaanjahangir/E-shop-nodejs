@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
+import authActions from "../../redux/auth/action";
 import CustomInputLarge from "../../components/CustomInputLarge";
 import CustomButtonLarge from "../../components/CustomButtonLarge";
 import AuthBackground from "../../components/AuthBackground";
 
-export default class Register extends Component {
+class Register extends Component {
   state = {
     firstName: "",
     lastName: "",
@@ -16,6 +18,18 @@ export default class Register extends Component {
     confirmPassword: "",
     gender: "male"
   };
+
+  componentDidMount() {
+    if (this.props.user) {
+      this.props.history.replace("/");
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.user) {
+      this.props.history.replace("/");
+    }
+  }
 
   handleTextChange = e => {
     const name = e.target.name;
@@ -34,6 +48,21 @@ export default class Register extends Component {
     return baseClass;
   };
 
+  handleSubmit = async e => {
+    e.preventDefault();
+
+    const payload = {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password,
+      gender: this.state.gender
+    };
+
+    this.props.register(payload);
+  };
+
   render() {
     const {
       firstName,
@@ -50,7 +79,7 @@ export default class Register extends Component {
         <AuthBackground />
         <Container className="mb-3 d-flex justify-content-center">
           <div style={{ maxWidth: "700px" }}>
-            <Form className="mt-4">
+            <Form onSubmit={this.handleSubmit} className="mt-4">
               <Row>
                 <Col xs={12}>
                   <div className="text-center">
@@ -148,7 +177,7 @@ export default class Register extends Component {
                 </Col>
                 <Col className="mt-4 mx-auto" md={6}>
                   <div>
-                    <CustomButtonLarge text="Register" />
+                    <CustomButtonLarge type="submit" text="Register" />
                   </div>
                   <div className="my-3 text-center">
                     <Link className="link" to="/login">
@@ -168,3 +197,14 @@ export default class Register extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({ user: state.auth.user });
+
+const mapDispatchToProps = {
+  register: authActions.register
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Register);
