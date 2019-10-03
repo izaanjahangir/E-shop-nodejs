@@ -32,5 +32,6 @@ router.post(
   multer({ storage }).single("image"),
   userController.updateUser
 );
+router.post("/charge", isAuthenticated, userController.charge);
 
 module.exports = router;

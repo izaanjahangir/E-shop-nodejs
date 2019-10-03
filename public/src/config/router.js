@@ -8,6 +8,7 @@ import Login from "../screens/Login";
 import Register from "../screens/Register";
 import Profile from "../screens/Profile";
 import Cart from "../screens/Cart";
+import Success from "../screens/Cart/Success";
 
 export default () => (
   <BrowserRouter>
@@ -19,6 +20,7 @@ export default () => (
       <Route path="/register" exact component={Register} />
       <Route path="/user/cart" exact component={Cart} />
       <Route path="/user/:id" exact component={Profile} />
+      <Route path="/payment/success" exact component={Success} />
     </Switch>
   </BrowserRouter>
 );

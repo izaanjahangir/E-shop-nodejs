@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Elements, StripeProvider } from "react-stripe-elements";
 
 import Loader from "./components/Loader";
 import categoryActions from "./redux/category/action";
@@ -9,10 +10,14 @@ function App(props) {
   props.fetchAllCategories();
 
   return (
-    <div id="outside-router">
-      <Router />
-      {props.loading && <Loader />}
-    </div>
+    <StripeProvider apiKey="pk_test_GxLP5trZb35oJ9XbjjICmbM2">
+      <div id="outside-router">
+        <Elements>
+          <Router />
+        </Elements>
+        {props.loading && <Loader />}
+      </div>
+    </StripeProvider>
   );
 }
 

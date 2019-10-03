@@ -4,6 +4,7 @@ const User = require("../models/User");
 const cloudnary = require("../services/cloudnary");
 const helpers = require("../config/helpers");
 const auth = require("../services/auth");
+const stripe = require("../services/stripe");
 
 const register = async (req, res) => {
   try {
@@ -113,11 +114,32 @@ const updateUser = async (req, res) => {
   }
 };
 
+const charge = async (req, res) => {
+  try {
+    const payload = {
+      source: req.body.token,
+      amount: req.body.amount,
+      description: "test",
+      currency: "usd"
+    };
+
+    const response = await stripe.charge(payload);
+
+    res.status(200).json(response);
+  } catch (e) {
+    console.log("e =>", e);
+    const errors = helpers.handleMongooseError(e);
+
+    res.status(400).json(errors);
+  }
+};
+
 module.exports = {
   register,
   login,
   getUser,
   changePassword,
   getUserById,
-  updateUser
+  updateUser,
+  charge
 };

@@ -10,6 +10,8 @@ const fetchProductById = body =>
 const fetchUserById = body => helpers.fetchApi(`/user/${body.id}`, "GET");
 const changePassword = (body, token) =>
   helpers.fetchApi("/user/changepassword", "POST", body, token);
+const charge = (body, token) =>
+  helpers.fetchApi("/user/charge", "POST", body, token);
 
 export default {
   login,
@@ -18,5 +20,6 @@ export default {
   fetchProductById,
   fetchUserById,
   changePassword,
-  updateUser
+  updateUser,
+  charge
 };

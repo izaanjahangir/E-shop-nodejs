@@ -7,7 +7,8 @@ import {
   faArrowAltCircleRight,
   faArrowAltCircleLeft,
   faCaretDown,
-  faTrashAlt
+  faTrashAlt,
+  faCheckCircle
 } from "@fortawesome/free-solid-svg-icons";
 
 let BASE_URL = "/api";
@@ -27,6 +28,7 @@ export default {
     faArrowAltCircleRight,
     faArrowAltCircleLeft,
     faCaretDown,
-    faTrashAlt
+    faTrashAlt,
+    faCheckCircle
   }
 };

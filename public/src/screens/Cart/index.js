@@ -4,14 +4,20 @@ import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
+import api from "../../config/api";
+import PaymentForm from "../../components/PaymentForm";
 import cartActions from "../../redux/cart/action";
+import loadingActions from "../../redux/loading/action";
 import Button from "../../components/Button";
-// import Spinner from "../../components/Spinner";
 import constants from "../../config/constants";
 import Header from "../../components/Header";
 import "./index.scss";
 
 class Cart extends Component {
+  state = {
+    isPaymentForm: false
+  };
+
   componentDidMount() {
     if (!this.props.user) {
       this.props.history.replace("/");
@@ -36,7 +42,32 @@ class Cart extends Component {
     return total;
   };
 
+  toggleForm = isPaymentForm => {
+    this.setState({ isPaymentForm });
+  };
+
+  handlePayment = async id => {
+    const { token, stopLoading, history, clearCart } = this.props;
+
+    try {
+      const payload = {
+        amount: this.calculateTotal() * 100,
+        token: id
+      };
+
+      const response = await api.charge(payload, token);
+
+      history.push("/payment/success", { payment: response });
+      clearCart();
+    } catch (e) {
+      console.log("e =>", e);
+    }
+
+    stopLoading();
+  };
+
   render() {
+    const { isPaymentForm } = this.state;
     const { cart } = this.props;
 
     return (
@@ -44,10 +75,11 @@ class Cart extends Component {
         <Header />
         <Container id="cart-page" className="my-3">
           {!!cart.length ? (
-            <div class="cart">
+            <div className="cart">
               <ListGroup>
                 {cart.map((item, i) => (
                   <CartItem
+                    key={Math.random().toString()}
                     onDelete={this.handleDelete}
                     index={i}
                     item={item}
@@ -55,7 +87,10 @@ class Cart extends Component {
                 ))}
               </ListGroup>
               <div className="my-2 text-right">
-                <Button value={`Pay now ${this.calculateTotal()}$`} />
+                <Button
+                  onClick={this.toggleForm.bind(this, true)}
+                  value={`Pay now ${this.calculateTotal()}$`}
+                />
               </div>
             </div>
           ) : (
@@ -67,7 +102,11 @@ class Cart extends Component {
               />
             </div>
           )}
-          {/* <Spinner size="100px" center={true} /> */}
+          <PaymentForm
+            onPayment={this.handlePayment}
+            onClose={this.toggleForm.bind(this, false)}
+            show={isPaymentForm}
+          />
         </Container>
       </div>
     );
@@ -75,7 +114,7 @@ class Cart extends Component {
 }
 
 const CartItem = props => (
-  <ListGroupItem keys={Math.random().toString()} className="cart-item">
+  <ListGroupItem className="cart-item">
     <Link to={`/product/${props.item._id}`}>{props.item.title}</Link>
     <div className="right">
       <span>{!!props.item.discountedPrice || props.item.price}$</span>
@@ -90,11 +129,15 @@ const CartItem = props => (
 
 const mapStateToProps = state => ({
   user: state.auth.user,
+  token: state.auth.token,
   cart: state.cart.cart
 });
 
 const mapDispatchToProps = {
-  removeFromCart: cartActions.removeFromCart
+  removeFromCart: cartActions.removeFromCart,
+  clearCart: cartActions.clearCart,
+  startLoading: loadingActions.startLoading,
+  stopLoading: loadingActions.stopLoading
 };
 
 export default connect(
