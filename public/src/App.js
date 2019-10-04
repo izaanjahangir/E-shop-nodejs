@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Elements, StripeProvider } from "react-stripe-elements";
 
 import Loader from "./components/Loader";
+import MessageBox from "./components/MessageBox";
 import categoryActions from "./redux/category/action";
 import Router from "./config/router";
 
@@ -16,12 +17,21 @@ function App(props) {
           <Router />
         </Elements>
         {props.loading && <Loader />}
+        {props.message && (
+          <MessageBox
+            type={props.message.type}
+            message={props.message.message}
+          />
+        )}
       </div>
     </StripeProvider>
   );
 }
 
-const mapStateToProps = state => ({ loading: state.loading.loading });
+const mapStateToProps = state => ({
+  loading: state.loading.loading,
+  message: state.messageBox.message
+});
 
 const mapDispatchToProps = {
   fetchAllCategories: categoryActions.fetchAllCategories

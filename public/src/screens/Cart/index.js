@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import api from "../../config/api";
 import PaymentForm from "../../components/PaymentForm";
 import cartActions from "../../redux/cart/action";
+import messageBoxActions from "../../redux/messageBox/action";
 import loadingActions from "../../redux/loading/action";
 import Button from "../../components/Button";
 import constants from "../../config/constants";
@@ -47,7 +48,13 @@ class Cart extends Component {
   };
 
   handlePayment = async id => {
-    const { token, stopLoading, history, clearCart } = this.props;
+    const {
+      token,
+      stopLoading,
+      history,
+      clearCart,
+      openMessageBox
+    } = this.props;
 
     try {
       const payload = {
@@ -57,10 +64,12 @@ class Cart extends Component {
 
       const response = await api.charge(payload, token);
 
+      openMessageBox({ type: "success", message: response.status });
       history.push("/payment/success", { payment: response });
       clearCart();
     } catch (e) {
       console.log("e =>", e);
+      openMessageBox({ type: "error", message: e.message });
     }
 
     stopLoading();
@@ -137,7 +146,8 @@ const mapDispatchToProps = {
   removeFromCart: cartActions.removeFromCart,
   clearCart: cartActions.clearCart,
   startLoading: loadingActions.startLoading,
-  stopLoading: loadingActions.stopLoading
+  stopLoading: loadingActions.stopLoading,
+  openMessageBox: messageBoxActions.openMessageBox
 };
 
 export default connect(

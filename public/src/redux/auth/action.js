@@ -1,4 +1,5 @@
 import api from "../../config/api";
+import constants from "../../config/constants";
 
 const updateUser = user => dispatch =>
   dispatch({ type: "UPDATE_USER", payload: user });
@@ -13,6 +14,18 @@ const login = credentials => async dispatch => {
     dispatch({ type: "USER_LOGIN", payload: response });
   } catch (e) {
     console.log("e =>", e);
+    dispatch({
+      type: "OPEN_MESSAGE_BOX",
+      payload: { type: "error", message: e.message }
+    });
+
+    setTimeout(
+      () =>
+        dispatch({
+          type: "CLOSE_MESSAGE_BOX"
+        }),
+      constants.MESSAGE_BOX_DURATION
+    );
   }
 
   dispatch({ type: "CHANGE_LOADING_STATE", payload: false });
@@ -28,6 +41,18 @@ const register = credentials => async dispatch => {
     dispatch({ type: "USER_LOGIN", payload: response });
   } catch (e) {
     console.log("e =>", e);
+    dispatch({
+      type: "OPEN_MESSAGE_BOX",
+      payload: { type: "error", message: e.message }
+    });
+
+    setTimeout(
+      () =>
+        dispatch({
+          type: "CLOSE_MESSAGE_BOX"
+        }),
+      constants.MESSAGE_BOX_DURATION
+    );
   }
 
   dispatch({ type: "CHANGE_LOADING_STATE", payload: false });

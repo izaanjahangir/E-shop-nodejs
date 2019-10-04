@@ -1,0 +1,45 @@
+@import "../../variables.scss";
+
+#message-box {
+  // display: flex;
+  // align-items: center;
+  color: white;
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  min-width: 250px;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  padding: $extraSmallPadding $smallPadding;
+  animation: slider-right 200ms forwards 1 linear;
+  width: 100%;
+}
+
+#message-box svg {
+  font-size: 1.2em;
+}
+
+#message-box .box.success {
+  background: $success;
+}
+
+#message-box .box.error {
+  background: $danger;
+}
+
+#message-box .box > p {
+  margin: 0;
+}
+
+@keyframes slider-right {
+  0% {
+    right: -250px;
+  }
+
+  100% {
+    right: 15;
+  }
+}

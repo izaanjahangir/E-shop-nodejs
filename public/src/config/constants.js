@@ -8,7 +8,9 @@ import {
   faArrowAltCircleLeft,
   faCaretDown,
   faTrashAlt,
-  faCheckCircle
+  faCheckCircle,
+  faTimes,
+  faExclamationCircle
 } from "@fortawesome/free-solid-svg-icons";
 
 let BASE_URL = "/api";
@@ -29,6 +31,9 @@ export default {
     faArrowAltCircleLeft,
     faCaretDown,
     faTrashAlt,
-    faCheckCircle
-  }
+    faCheckCircle,
+    faTimes,
+    faExclamationCircle
+  },
+  MESSAGE_BOX_DURATION: 2000
 };
