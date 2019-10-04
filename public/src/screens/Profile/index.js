@@ -4,6 +4,7 @@ import { Container, Row, Col, Tabs, Tab } from "react-bootstrap";
 
 import Avatar from "../../components/Avatar";
 import loaderActions from "../../redux/loading/action";
+import messageBoxActions from "../../redux/messageBox/action";
 import authActions from "../../redux/auth/action";
 import api from "../../config/api";
 import Basic from "./Basic";
@@ -51,6 +52,7 @@ class Profile extends Component {
 
   fetchUser = async () => {
     const { id } = this.state;
+    const { openMessageBox } = this.props;
 
     try {
       this.setState({ isLoading: true });
@@ -60,30 +62,47 @@ class Profile extends Component {
       this.setState({ user: response });
     } catch (e) {
       console.log("e =>", e);
+      openMessageBox({
+        type: "success",
+        message: e.message
+      });
     }
 
     this.setState({ isLoading: false });
   };
 
   onBasicSubmit = async newProfile => {
-    const { startLoading, stopLoading, token, updateUser } = this.props;
+    const { startLoading, stopLoading, token, updateUser, openMessageBox } = this.props;
     try {
-      console.log("newProfile =>", newProfile);
       startLoading();
 
       const response = await api.updateUser(newProfile, token);
-      console.log("response =>", response);
+
+      openMessageBox({
+        type: "success",
+        message: "Profile successfully updated!"
+      });
 
       updateUser(response);
     } catch (e) {
       console.log("e =>", e);
+      openMessageBox({
+        type: "error",
+        message: e.message
+      });
     }
 
     stopLoading();
   };
 
   handleAvatarUpload = async file => {
-    const { startLoading, stopLoading, token, updateUser } = this.props;
+    const {
+      startLoading,
+      stopLoading,
+      token,
+      updateUser,
+      openMessageBox
+    } = this.props;
 
     try {
       startLoading();
@@ -93,16 +112,25 @@ class Profile extends Component {
 
       const response = await api.updateUser(formdata, token);
 
+      openMessageBox({
+        type: "success",
+        message: "Profile picture successfully changed!"
+      });
+
       updateUser(response);
     } catch (e) {
       console.log("e =>", e);
+      openMessageBox({
+        type: "error",
+        message: e.message
+      });
     }
 
     stopLoading();
   };
 
   onSecuritySubmit = async newCredentials => {
-    const { startLoading, stopLoading, token } = this.props;
+    const { startLoading, stopLoading, token, openMessageBox } = this.props;
 
     try {
       startLoading();
@@ -112,10 +140,18 @@ class Profile extends Component {
         newPassword: newCredentials.newPassword
       };
 
-      const response = await api.changePassword(payload, token);
-      console.log("response =>", response);
+      await api.changePassword(payload, token);
+
+      openMessageBox({
+        type: "success",
+        message: "Password successfully changed!"
+      });
     } catch (e) {
       console.log("e =>", e);
+      openMessageBox({
+        type: "error",
+        message: e.message
+      });
     }
 
     stopLoading();
@@ -177,7 +213,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   startLoading: loaderActions.startLoading,
   stopLoading: loaderActions.stopLoading,
-  updateUser: authActions.updateUser
+  updateUser: authActions.updateUser,
+  openMessageBox: messageBoxActions.openMessageBox
 };
 
 export default connect(
