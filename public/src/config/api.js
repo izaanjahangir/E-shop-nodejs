@@ -13,6 +13,8 @@ const changePassword = (body, token) =>
   helpers.fetchApi("/user/changepassword", "POST", body, token);
 const charge = (body, token) =>
   helpers.fetchApi("/user/charge", "POST", body, token);
+const createCategory = (body, token) =>
+  helpers.fetchApi("/category/create", "POST", body, token, "form-data");
 
 export default {
   login,
@@ -23,5 +25,6 @@ export default {
   fetchUserById,
   changePassword,
   updateUser,
-  charge
+  charge,
+  createCategory
 };

@@ -10,6 +10,11 @@ import Profile from "../screens/Profile";
 import Cart from "../screens/Cart";
 import Success from "../screens/Cart/Success";
 
+// Admin pages
+import AdminHome from "../screens/Admin/Home";
+import AddCategory from "../screens/Admin/AddCategory";
+import AddProduct from "../screens/Admin/AddProduct";
+
 export default () => (
   <BrowserRouter>
     <Switch>
@@ -21,6 +26,10 @@ export default () => (
       <Route path="/user/cart" exact component={Cart} />
       <Route path="/user/:id" exact component={Profile} />
       <Route path="/payment/success" exact component={Success} />
+      {/* Admin Routes */}
+      <Route path="/admin" exact component={AdminHome} />
+      <Route path="/admin/addcategory" exact component={AddCategory} />
+      <Route path="/admin/addproduct" exact component={AddProduct} />
     </Switch>
   </BrowserRouter>
 );

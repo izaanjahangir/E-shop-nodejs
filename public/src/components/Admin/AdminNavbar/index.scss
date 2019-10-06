@@ -1,0 +1,15 @@
+@import "../../../variables.scss";
+
+.header-brand,
+.header-brand:hover {
+  font-size: 1.5em;
+  text-decoration: none;
+  color: white;
+}
+
+#admin-navbar #responsive-navbar-nav a,
+#admin-navbar #responsive-navbar-nav a:hover {
+  color: white;
+  text-decoration: none;
+  padding: $extraSmallPadding
+}

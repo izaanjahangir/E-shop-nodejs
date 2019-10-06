@@ -86,54 +86,56 @@ class Header extends Component {
             </p>
           )}
         </div>
-        <div id="custom-header-container">
-          <Link className="header-brand" to="/">
-            <h3>Eshop</h3>
-          </Link>
-          {this.props.search && (
-            <Form onSubmit={this.handleSubmit}>
-              <InputGroup size="sm">
-                <FormControl
-                  name="category"
-                  value={category}
-                  onChange={this.handleChange}
-                  as="select"
-                >
-                  <option value="" disabled>
-                    Category
-                  </option>
-                  {this.props.allCategories.map(item => (
-                    <option key={item._id} value={item._id}>
-                      {item.name}
+        {this.props.searchHeader && (
+          <div id="custom-header-container">
+            <Link className="header-brand" to="/">
+              <h3>Eshop</h3>
+            </Link>
+            {this.props.search && (
+              <Form onSubmit={this.handleSubmit}>
+                <InputGroup size="sm">
+                  <FormControl
+                    name="category"
+                    value={category}
+                    onChange={this.handleChange}
+                    as="select"
+                  >
+                    <option value="" disabled>
+                      Category
                     </option>
-                  ))}
-                </FormControl>
-                <FormControl
-                  name="title"
-                  placeholder="title"
-                  value={title}
-                  onChange={this.handleChange}
-                />
-                <InputGroup.Append>
-                  <Button type="submit" variant="danger">
-                    Search
-                  </Button>
-                </InputGroup.Append>
-              </InputGroup>
-            </Form>
-          )}
-          <div id="header-icons">
-            {/* <HeaderIcon count="5" text="Your wishlist" icon="faHeart" /> */}
-            {user && (
-              <HeaderIcon
-                onClick={() => this.props.history.push("/user/cart")}
-                text="Your cart"
-                count={this.props.cart.length}
-                icon="faShoppingCart"
-              />
+                    {this.props.allCategories.map(item => (
+                      <option key={item._id} value={item._id}>
+                        {item.name}
+                      </option>
+                    ))}
+                  </FormControl>
+                  <FormControl
+                    name="title"
+                    placeholder="title"
+                    value={title}
+                    onChange={this.handleChange}
+                  />
+                  <InputGroup.Append>
+                    <Button type="submit" variant="danger">
+                      Search
+                    </Button>
+                  </InputGroup.Append>
+                </InputGroup>
+              </Form>
             )}
+            <div id="header-icons">
+              {/* <HeaderIcon count="5" text="Your wishlist" icon="faHeart" /> */}
+              {user && (
+                <HeaderIcon
+                  onClick={() => this.props.history.push("/user/cart")}
+                  text="Your cart"
+                  count={this.props.cart.length}
+                  icon="faShoppingCart"
+                />
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     );
   }
@@ -186,7 +188,8 @@ class UserProfile extends Component {
 }
 
 Header.defaultProps = {
-  search: true
+  search: true,
+  searchHeader: true
 };
 
 const mapStateToProps = state => ({
