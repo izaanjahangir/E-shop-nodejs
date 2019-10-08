@@ -27,7 +27,6 @@ const findSingleProduct = async (req, res) => {
 
 const createProduct = async (req, res) => {
   const bannerImage = req.files.bannerImage;
-  console.log("req.files.images =>", req.files.images)
   const images = req.files.images || [];
 
   try {
@@ -36,8 +35,6 @@ const createProduct = async (req, res) => {
     }
 
     const data = req.body;
-
-    console.log("data =>", data)
 
     const payload = {
       title: data.title,
@@ -103,7 +100,7 @@ const findProduct = async (req, res) => {
     }
 
     const productQuery = Product.find(queryBuilder(query))
-      .sort({ createdAt: 1 })
+      .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limit)
       .populate("category")
