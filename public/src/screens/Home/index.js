@@ -10,10 +10,11 @@ import "./index.scss";
 class Home extends Component {
   componentDidMount() {
     this.props.fetchLatestProducts();
+    this.props.fetchMobiles();
   }
 
   render() {
-    const { latestProducts } = this.props;
+    const { latestProducts, mobiles } = this.props;
 
     return (
       <div id="container">
@@ -24,6 +25,11 @@ class Home extends Component {
             data={latestProducts.data}
             loading={latestProducts.loading}
           />
+          <ProductSlider
+            sliderTitle="Mobiles"
+            data={mobiles.data}
+            loading={mobiles.loading}
+          />
         </Container>
       </div>
     );
@@ -31,11 +37,13 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  latestProducts: state.product.latestProducts
+  latestProducts: state.product.latestProducts,
+  mobiles: state.product.mobiles,
 });
 
 const mapDispatchToProps = {
-  fetchLatestProducts: productActions.fetchLatestProducts
+  fetchLatestProducts: productActions.fetchLatestProducts,
+  fetchMobiles: productActions.fetchMobiles,
 };
 
 export default connect(
