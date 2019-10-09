@@ -131,13 +131,13 @@ const charge = async (req, res) => {
     const orderPayload = {
       product,
       user: req.user,
-      amount: req.body.amount
+      amount: req.body.amount / 100
     };
 
     const order = new Order(orderPayload);
 
     await order.save();
-    
+
     res.status(200).json(response);
   } catch (e) {
     console.log("e =>", e);
