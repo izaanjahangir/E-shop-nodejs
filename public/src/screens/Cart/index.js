@@ -53,13 +53,15 @@ class Cart extends Component {
       stopLoading,
       history,
       clearCart,
-      openMessageBox
+      openMessageBox,
+      cart
     } = this.props;
 
     try {
       const payload = {
         amount: this.calculateTotal() * 100,
-        token: id
+        token: id,
+        order: cart
       };
 
       const response = await api.charge(payload, token);

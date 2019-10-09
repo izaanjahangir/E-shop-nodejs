@@ -6,6 +6,7 @@ import product from "./product/reducer";
 import category from "./category/reducer";
 import cart from "./cart/reducer";
 import messageBox from "./messageBox/reducer";
+import order from "./order/reducer";
 
 export default combineReducers({
   auth,
@@ -13,5 +14,6 @@ export default combineReducers({
   category,
   loading,
   cart,
-  messageBox
+  messageBox,
+  order
 });

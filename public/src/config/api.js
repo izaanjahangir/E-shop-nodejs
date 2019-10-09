@@ -17,6 +17,8 @@ const createCategory = (body, token) =>
   helpers.fetchApi("/category/create", "POST", body, token, "form-data");
 const createProduct = (body, token) =>
   helpers.fetchApi("/product/create", "POST", body, token, "form-data");
+const fetchOrders = (body, token) =>
+  helpers.fetchApi("/order/allorders", "POST", body, token);
 
 export default {
   login,
@@ -29,5 +31,6 @@ export default {
   updateUser,
   charge,
   createCategory,
-  createProduct
+  createProduct,
+  fetchOrders
 };

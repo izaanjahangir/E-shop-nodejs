@@ -40,6 +40,10 @@ class Login extends Component {
 
   componentDidUpdate() {
     if (this.props.user) {
+      if (this.props.user.role === "admin") {
+        return this.props.history.replace("/admin");
+      }
+
       this.props.history.replace("/");
     }
   }

@@ -1,6 +1,7 @@
 const fs = require("fs");
 
 const User = require("../models/User");
+const Order = require("../models/Order");
 const cloudnary = require("../services/cloudnary");
 const helpers = require("../config/helpers");
 const auth = require("../services/auth");
@@ -125,6 +126,18 @@ const charge = async (req, res) => {
 
     const response = await stripe.charge(payload);
 
+    const product = req.body.order.map(item => item._id);
+
+    const orderPayload = {
+      product,
+      user: req.user,
+      amount: req.body.amount
+    };
+
+    const order = new Order(orderPayload);
+
+    await order.save();
+    
     res.status(200).json(response);
   } catch (e) {
     console.log("e =>", e);
