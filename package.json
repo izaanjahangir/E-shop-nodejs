@@ -8,7 +8,8 @@
     "server": "nodemon server",
     "start": "node server",
     "dev": "concurrently \"npm run client\" \"npm run server\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix public && npm run build --prefix public"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix public && npm run build --prefix public",
+    "build": "cd public && npm install && npm run build"
   },
   "repository": {
     "type": "git",
